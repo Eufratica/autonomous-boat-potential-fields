@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>xasv_sim</name>
+  <version>0.0.0</version>
+  <description>
+      ---
+  </description>
+  <maintainer email="ttrindade.ee@gmail.com">---</maintainer>
+  <license>Apache 2.0</license>
+  <url type="https://github.com/ttrindader/xasv-sim">---</url>
+  <url type="https://github.com/ttrindader/xasv-sim">--</url>
+  <author email="ttrindade.ee@gmail.com">---</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>gazebo_plugins</depend>
+  <depend>xacro</depend>
+  <depend>roscpp</depend>
+</package>

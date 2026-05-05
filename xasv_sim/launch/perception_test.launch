@@ -1,0 +1,148 @@
+<launch>
+  <!-- Gazebo world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find xasv_sim)/worlds/madeira_river.world"/>
+    <arg name="verbose" value="true"/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="true"/>
+    <arg name="use_sim_time" value="true"/>
+  </include>
+
+  <!-- Robot namespace -->
+  <arg name="namespace" default="migbot1"/>
+  <arg name="robot_name" default="$(arg namespace)"/>
+
+  <!-- Control mode -->
+  <arg name="ardupilot" default="true"/>
+
+  <!-- Initial pose -->
+  <arg name="x" default="1095.546631"/>
+  <arg name="y" default="-379.051544"/>
+  <arg name="z" default="0.5"/>
+  <arg name="P" default="0"/>
+  <arg name="R" default="0"/>
+  <arg name="Y" default="3.14"/>
+
+  <!-- Sensor flags -->
+  <arg name="livox_enabled" default="true"/>
+  <arg name="ping360_enabled" default="true"/>
+  <arg name="realsensed435_enabled" default="true"/>
+  <arg name="ping360_imaging_enabled" default="false"/>
+
+  <!-- URDF/Xacro -->
+  <arg name="urdf" default="$(find migbot_gazebo)/urdf/migbot_gazebo.urdf.xacro"/>
+
+  <!-- Global robot_description -->
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(arg urdf)
+                  namespace:=$(arg namespace)
+                  robot_name:=$(arg robot_name)
+                  ardupilot:=$(arg ardupilot)
+                  ping360_imaging_enabled:=$(arg ping360_imaging_enabled)
+                  livox_enabled:=$(arg livox_enabled)
+                  ping360_enabled:=$(arg ping360_enabled)
+                  realsensed435_enabled:=$(arg realsensed435_enabled)"/>
+
+  <!-- Global robot_state_publisher (escuta joint_states do namespace) -->
+  <node pkg="robot_state_publisher"
+        type="robot_state_publisher"
+        name="robot_state_publisher"
+        output="screen">
+    <remap from="/joint_states" to="$(arg namespace)/joint_states"/>
+  </node>
+
+    <!-- Static TF for Livox -->
+    <node pkg="tf"
+          type="static_transform_publisher"
+          name="livox_tf"
+          args="0.573 0.0 1 0 0 0 base_link livox 100"/>
+
+
+  <!-- Everything else under the robot namespace -->
+  <group ns="$(arg namespace)">
+
+    <!-- Spawn model in Gazebo using global robot_description -->
+    <node name="spawn_model"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          output="screen"
+          args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)
+	        -urdf -param /robot_description
+	        -model $(arg robot_name)
+	        -robot_namespace $(arg namespace)"/>
+	        
+         <!-- Static TF for sonar -->
+    <node pkg="tf"
+          type="static_transform_publisher"
+          name="ping_tf"
+          args="0 0 -20 0 0 0 base_link sonar_frame 100"/>	        
+	        
+	        
+
+    <!-- ===== ROS CONTROL (only when ardupilot=false) ===== -->
+    <group unless="$(arg ardupilot)">
+
+      <rosparam>
+        joint_state_controller:
+          type: joint_state_controller/JointStateController
+          publish_rate: 50
+
+        Engine_helice_1_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_1
+
+        Engine_helice_2_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_2
+
+        Engine_helice_3_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_3
+
+        Engine_helice_4_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_4
+
+        Engine_helice_5_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_5
+
+        Engine_helice_6_effort_controller:
+          type: effort_controllers/JointEffortController
+          joint: Engine_helice_6
+      </rosparam>
+
+      <node name="controller_spawner"
+            pkg="controller_manager"
+            type="spawner"
+            output="screen"
+            respawn="true"
+            args="joint_state_controller
+                  Engine_helice_1_effort_controller Engine_helice_2_effort_controller
+                  Engine_helice_3_effort_controller Engine_helice_4_effort_controller
+                  Engine_helice_5_effort_controller Engine_helice_6_effort_controller"/>
+    </group>
+
+    <!-- ===== ARDUPILOT CONTROL (only when ardupilot=true) ===== -->
+    <group if="$(arg ardupilot)">
+      <!-- Nodes/bridges for ArduPilot HITL/SITL can go here if needed -->
+    </group>
+
+    <!-- ===== PCL FOR PING360 (when ping360_enabled=true) ===== -->
+    <group if="$(arg ping360_enabled)">
+      <node pkg="ping360_gazebo_plugin"
+            name="pcl_gen"
+            type="pcl_gen.py"/>
+    </group>
+
+    <!-- RViz -->
+    <node
+      pkg="rviz"
+      type="rviz"
+      name="rviz_perception"
+      args="-d $(find xasv_sim)/rviz/perception_test.rviz"
+      output="screen" />
+
+  </group>
+</launch>
+

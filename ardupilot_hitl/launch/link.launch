@@ -1,0 +1,9 @@
+<launch>
+    
+    <node name="ardupilot_hitl_tx" pkg="ardupilot_hitl" type="tx_data_node" output="screen"> </node> <!-- TX sensors data from FCU -->
+    <node name="ardupilot_hitl_rx" pkg="ardupilot_hitl" type="rx_data_node" output="screen"> </node> <!-- RX PWM data from FCU -->    
+
+    
+</launch>
+
+

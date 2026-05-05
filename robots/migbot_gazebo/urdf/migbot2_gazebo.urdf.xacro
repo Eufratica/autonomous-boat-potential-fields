@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="migbot1">
+  <xacro:arg name="livox_enabled" default="false" />
+  <xacro:arg name="ping360_enabled" default="false" />
+  <xacro:arg name="realsensed435_enabled" default="false" />  
+  <xacro:arg name="robot_name" default="migbot1"/>
+  <xacro:arg name="ardupilot" default="false"/>
+
+  <xacro:arg name="namespace" default=""/>     
+  <xacro:arg name="ping360_imaging_enabled" default=""/>       
+  <xacro:property name="namespace" value="$(arg namespace)" scope="global" />    
+  <xacro:property name="ardupilot" value="$(arg ardupilot)" scope="global" />     
+  
+
+  <xacro:include filename="$(find migbot_gazebo)/urdf/migbot2_gazebo.xacro"/> 
+  
+
+    <!-- Add MID-70 LIDAR --> 
+    <xacro:if value="$(arg livox_enabled)">
+        <xacro:Livox_Mid70_mount name="livox" />
+    </xacro:if> 
+    
+    <!-- Add ping360 SONAR --> 
+    <xacro:if value="$(arg ping360_enabled)">
+        <xacro:ping360_mount name="ping360" ping360_imaging_enabled="$(arg ping360_imaging_enabled)"/>
+    </xacro:if> 
+    
+    <!-- Add realsense --> 
+    <xacro:if value="$(arg realsensed435_enabled)">
+        <xacro:realsensed435_mount
+	    parent_link ="base_link"
+	    name ="realsense"
+	    x ="0.7" y ="0.0" z ="0.70"
+	    roll ="0" pitch ="0" yaw ="0"
+	    prefix ="realsense"/>
+    </xacro:if>          
+
+
+</robot>

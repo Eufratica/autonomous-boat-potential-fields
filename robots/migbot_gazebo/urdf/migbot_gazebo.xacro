@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Include macros for dynamics plugins -->
+  <xacro:include filename="$(find migbot_gazebo)/urdf/macros_migbot.xacro" />
+
+  <!-- Defines the base vehicle (choose by robot_name) -->
+  <xacro:include filename="$(find migbot_description)/urdf/$(arg robot_name).urdf.xacro" />
+
+</robot>
+

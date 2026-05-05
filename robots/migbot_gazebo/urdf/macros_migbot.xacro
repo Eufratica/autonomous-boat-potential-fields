@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!-- Includes all macros in this package so they don't need to be included individualy -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="migbot1">
+  <!-- Include dynamics macros -->
+
+  <!-- Include sensor macros -->
+  <xacro:include filename="$(find migbot_gazebo)/urdf/components/Livox_Mid70_mount.xacro" /> 
+  <xacro:include filename="$(find migbot_gazebo)/urdf/components/ping360_mount.xacro" />   
+  <xacro:include filename="$(find migbot_gazebo)/urdf/components/realsensed435_mount.xacro" />     
+
+
+</robot>

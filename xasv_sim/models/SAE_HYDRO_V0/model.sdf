@@ -1,0 +1,3707 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="SAE_HYDRO_V0">
+    <static>true</static>
+    <link name="grid0">
+      <pose>401.1877136230469 -563.902099609375 33.649864196777344 0.0 -0.0 0.0</pose>
+      <visual name="grid0_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/grid0.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="grid0_basebox">
+        <!-- Centro da malha no frame do link + orientação (yaw) principal -->
+        <pose>-0.012944 -0.014759 1.243475 0 0 1.242577</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.826429 0.328338 2.486950</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="grid0.001">
+      <pose>698.0176391601562 -826.5170288085938 33.649864196777344 0.0 -0.0 -1.6654788255691528</pose>
+      <visual name="grid0.001_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/grid0.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="grid0_basebox">
+        <!-- Centro da malha no frame do link + orientação (yaw) principal -->
+        <pose>-0.012944 -0.014759 1.243475 0 0 1.242577</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.826429 0.328338 2.486950</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="grid0.002">
+      <pose>707.0576171875 -835.5270385742188 33.649864196777344 0.0 -0.0 0.7008822560310364</pose>
+      <visual name="grid0.002_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/grid0.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="grid0_basebox">
+        <!-- Centro da malha no frame do link + orientação (yaw) principal -->
+        <pose>-0.012944 -0.014759 1.243475 0 0 1.242577</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.826429 0.328338 2.486950</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="maincolumn">
+      <pose>705.1491088867188 -830.0390014648438 30.990325927734375 -0.16178365051746368 -0.2630668580532074 0.02903270535171032</pose>
+      <visual name="maincolumn_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/maincolumn.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="maincolumn_basebox">
+        <!-- Cilindro alinhado ao eixo da malha -->
+        <pose>0 0 3.729830 0 0.285020 -0.595138</pose>
+        <geometry>
+          <cylinder>
+            <radius>3.007000</radius>
+            <length>6.014022</length>
+          </cylinder>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="bigbuoygrid.001">
+      <pose>397.45355224609375 -578.0829467773438 33.926944732666016 0.0 -0.0 -0.8198248147964478</pose>
+      <visual name="bigbuoygrid.001_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.001">
+      <pose>395.83355712890625 -585.1028442382812 33.926944732666016 0.0 -0.0 -0.7493787407875061</pose>
+      <visual name="smallbuoygrid.001_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.001_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    
+    <link name="smallbuoygrid.002">
+      <pose>395.0135498046875 -592.202880859375 33.926944732666016 0.0 -0.0 -0.5967518091201782</pose>
+      <visual name="smallbuoygrid.002_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.002_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.003">
+      <pose>395.11358642578125 -599.3828735351562 33.926944732666016 0.0 -0.0 -0.4921915829181671</pose>
+      <visual name="smallbuoygrid.003_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.003_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.004">
+      <pose>396.4875793457031 -613.7308959960938 33.926944732666016 0.0 -0.0 -0.38508129119873047</pose>
+      <visual name="bigbuoygrid.004_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.005">
+      <pose>397.8375549316406 -620.8408813476562 33.926944732666016 0.0 -0.0 -0.3453325927257538</pose>
+      <visual name="smallbuoygrid.005_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.005_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.006">
+      <pose>401.02655029296875 -634.9278564453125 33.926944732666016 0.0 -0.0 -0.27839377522468567</pose>
+      <visual name="bigbuoygrid.006_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.007">
+      <pose>402.8925476074219 -641.913818359375 33.926944732666016 0.0 -0.0 -0.26073676347732544</pose>
+      <visual name="smallbuoygrid.007_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.007_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.008">
+      <pose>408.0035400390625 -655.23291015625 33.926944732666016 0.0 -0.0 -0.15</pose>
+      <visual name="bigbuoygrid.008_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.009">
+      <pose>412.0965270996094 -661.1529541015625 33.926944732666016 0.0 -0.0 0.1137068048119545</pose>
+      <visual name="smallbuoygrid.009_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.009_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.002">
+      <pose>421.4935302734375 -672.1119384765625 33.926944732666016 0.0 -0.0 0.1930672824382782</pose>
+      <visual name="bigbuoygrid.002_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.011">
+      <pose>426.4395446777344 -677.3949584960938 33.926944732666016 0.0 -0.0 0.19998934864997864</pose>
+      <visual name="smallbuoygrid.011_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.011_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.012">
+      <pose>431.591552734375 -682.4240112304688 33.926944732666016 0.0 -0.0 0.28360968828201294</pose>
+      <visual name="smallbuoygrid.012_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.012_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.013">
+      <pose>436.9895324707031 -687.2550048828125 33.926944732666016 0.0 -0.0 0.28360968828201294</pose>
+      <visual name="smallbuoygrid.013_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.013_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.014">
+      <pose>442.5515441894531 -691.81298828125 33.926944732666016 0.0 -0.0 0.36193662881851196</pose>
+      <visual name="smallbuoygrid.014_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.014_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.015">
+      <pose>448.4505310058594 -695.9650268554688 33.926944732666016 0.0 -0.0 0.42792263627052307</pose>
+      <visual name="smallbuoygrid.015_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.015_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.016">
+      <pose>454.49053955078125 -699.9530029296875 33.926944732666016 0.0 -0.0 0.42792263627052307</pose>
+      <visual name="smallbuoygrid.016_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.016_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.017">
+      <pose>460.5285339355469 -703.9400024414062 33.926944732666016 0.0 -0.0 0.42792263627052307</pose>
+      <visual name="smallbuoygrid.017_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.017_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.018">
+      <pose>466.571533203125 -707.9299926757812 33.926944732666016 0.0 -0.0 0.42792263627052307</pose>
+      <visual name="smallbuoygrid.018_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.018_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.019">
+      <pose>472.63653564453125 -711.8679809570312 33.926944732666016 0.0 -0.0 0.42792263627052307</pose>
+      <visual name="smallbuoygrid.019_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.019_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.020">
+      <pose>478.7415466308594 -715.7520141601562 33.926944732666016 0.0 -0.0 0.45649877190589905</pose>
+      <visual name="smallbuoygrid.020_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.020_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.021">
+      <pose>484.85455322265625 -719.6410522460938 33.926944732666016 0.0 -0.0 0.45649877190589905</pose>
+      <visual name="smallbuoygrid.021_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.021_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.022">
+      <pose>490.9625549316406 -723.527099609375 33.926944732666016 0.0 -0.0 0.4243285357952118</pose>
+      <visual name="smallbuoygrid.022_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.022_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.023">
+      <pose>497.0805358886719 -727.4191284179688 33.926944732666016 0.0 -0.0 0.44792887568473816</pose>
+      <visual name="smallbuoygrid.023_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.023_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.024">
+      <pose>503.31756591796875 -730.9791259765625 33.926944732666016 0.0 -0.0 0.5466865301132202</pose>
+      <visual name="smallbuoygrid.024_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.024_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.025">
+      <pose>509.694580078125 -734.451171875 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.025_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.025_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.026">
+      <pose>515.9486083984375 -738.1021728515625 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.026_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.026_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.027">
+      <pose>522.2006225585938 -741.751220703125 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.027_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.027_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.028">
+      <pose>528.4506225585938 -745.3992309570312 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.028_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.028_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.029">
+      <pose>534.7076416015625 -749.0512084960938 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.029_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.029_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.030">
+      <pose>540.9666748046875 -752.6692504882812 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.030_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.030_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.031">
+      <pose>547.2646484375 -756.2432250976562 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.031_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.031_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.032">
+      <pose>553.5586547851562 -759.8152465820312 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.032_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.032_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.033">
+      <pose>559.8506469726562 -763.38720703125 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.033_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.033_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.034">
+      <pose>566.1566162109375 -766.9462280273438 33.926944732666016 0.0 -0.0 0.48333847522735596</pose>
+      <visual name="smallbuoygrid.034_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.034_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.035">
+      <pose>572.5066528320312 -770.3721923828125 33.926944732666016 0.0 -0.0 0.5374307632446289</pose>
+      <visual name="smallbuoygrid.035_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.035_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.036">
+      <pose>578.8806762695312 -773.8272094726562 33.926944732666016 0.0 -0.0 0.502057671546936</pose>
+      <visual name="smallbuoygrid.036_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.036_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.037">
+      <pose>585.1716918945312 -777.4041748046875 33.926944732666016 0.0 -0.0 0.502057671546936</pose>
+      <visual name="smallbuoygrid.037_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.037_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.038">
+      <pose>591.470703125 -780.984130859375 33.926944732666016 0.0 -0.0 0.502057671546936</pose>
+      <visual name="smallbuoygrid.038_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.038_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.039">
+      <pose>597.763671875 -784.5620727539062 33.926944732666016 0.0 -0.0 0.502057671546936</pose>
+      <visual name="smallbuoygrid.039_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.039_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.040">
+      <pose>604.1246337890625 -787.9400634765625 33.926944732666016 0.0 -0.0 0.5489377975463867</pose>
+      <visual name="smallbuoygrid.040_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.040_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.041">
+      <pose>610.6246337890625 -791.1200561523438 33.926944732666016 0.0 -0.0 0.5489377975463867</pose>
+      <visual name="smallbuoygrid.041_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.041_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.042">
+      <pose>617.1846313476562 -794.1260375976562 33.926944732666016 0.0 -0.0 0.6180512309074402</pose>
+      <visual name="smallbuoygrid.042_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.042_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.043">
+      <pose>623.8555908203125 -796.927001953125 33.926944732666016 0.0 -0.0 0.6180512309074402</pose>
+      <visual name="smallbuoygrid.043_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.043_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.044">
+      <pose>630.5546264648438 -799.6699829101562 33.926944732666016 0.0 -0.0 0.6180512309074402</pose>
+      <visual name="smallbuoygrid.044_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.044_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.045">
+      <pose>637.2506103515625 -802.4099731445312 33.926944732666016 0.0 -0.0 0.6180512309074402</pose>
+      <visual name="smallbuoygrid.045_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.045_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.046">
+      <pose>643.9696044921875 -805.0779418945312 33.926944732666016 0.0 -0.0 0.6516894102096558</pose>
+      <visual name="smallbuoygrid.046_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.046_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.047">
+      <pose>650.7266235351562 -807.6849365234375 33.926944732666016 0.0 -0.0 0.6516894102096558</pose>
+      <visual name="smallbuoygrid.047_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.047_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.048">
+      <pose>657.4756469726562 -810.2908935546875 33.926944732666016 0.0 -0.0 0.6516894102096558</pose>
+      <visual name="smallbuoygrid.048_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.048_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.049">
+      <pose>664.2666625976562 -812.7399291992188 33.926944732666016 0.0 -0.0 0.6914358139038086</pose>
+      <visual name="smallbuoygrid.049_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.049_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.050">
+      <pose>671.138671875 -815.0529174804688 33.926944732666016 0.0 -0.0 0.6914358139038086</pose>
+      <visual name="smallbuoygrid.050_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.050_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.051">
+      <pose>677.9586791992188 -817.5279541015625 33.926944732666016 0.0 -0.0 0.6441224813461304</pose>
+      <visual name="smallbuoygrid.051_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.051_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.052">
+      <pose>684.681 -820.257 33.9269 0 -0 -2.52794</pose>
+      <visual name="bigbuoygrid.052_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+     <link name="bigbuoygrid.054">
+      <pose>712.5707397460938 -849.1190185546875 33.926944732666016 0.0 -0.0 -0.20235052704811096</pose>
+      <visual name="bigbuoygrid.054_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.055">
+      <pose>715.105712890625 -855.8980102539062 33.926944732666016 0.0 -0.0 -0.20235052704811096</pose>
+      <visual name="smallbuoygrid.055_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.055_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.056">
+      <pose>717.6397705078125 -862.6770629882812 33.926944732666016 0.0 -0.0 -0.20235052704811096</pose>
+      <visual name="smallbuoygrid.056_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.056_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.057">
+      <pose>720.5947875976562 -869.1990966796875 33.926944732666016 0.0 -0.0 -0.05858379602432251</pose>
+      <visual name="smallbuoygrid.057_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.057_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.058">
+      <pose>724.1107788085938 -875.5111083984375 33.926944732666016 0.0 -0.0 -0.02870277687907219</pose>
+      <visual name="smallbuoygrid.058_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.058_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.059">
+      <pose>727.7467651367188 -881.7720947265625 33.926944732666016 0.0 -0.0 -0.02870277687907219</pose>
+      <visual name="smallbuoygrid.059_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.059_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.003">
+      <pose>735.65283203125 -893.820068359375 33.926944732666016 0.0 -0.0 0.1044413149356842</pose>
+      <visual name="bigbuoygrid.003_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.061">
+      <pose>740.1148681640625 -899.5150756835938 33.926944732666016 0.0 -0.0 0.1044413149356842</pose>
+      <visual name="smallbuoygrid.061_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.061_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.062">
+      <pose>744.5848388671875 -905.213134765625 33.926944732666016 0.0 -0.0 0.1044413149356842</pose>
+      <visual name="smallbuoygrid.062_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.062_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.063">
+      <pose>748.98583984375 -910.9811401367188 33.926944732666016 0.0 -0.0 0.08394481241703033</pose>
+      <visual name="smallbuoygrid.063_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.063_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.064">
+      <pose>753.288818359375 -916.8011474609375 33.926944732666016 0.0 -0.0 0.08394481241703033</pose>
+      <visual name="smallbuoygrid.064_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.064_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.005">
+      <pose>767.6307983398438 -932.9671630859375 33.926944732666016 0.0 -0.0 0.2594667375087738</pose>
+      <visual name="bigbuoygrid.005_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.066">
+      <pose>772.9378051757812 -937.88818359375 33.926944732666016 0.0 -0.0 0.2594667375087738</pose>
+      <visual name="smallbuoygrid.066_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.066_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.067">
+      <pose>778.2437744140625 -942.8082275390625 33.926944732666016 0.0 -0.0 0.2594667375087738</pose>
+      <visual name="smallbuoygrid.067_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.067_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.068">
+      <pose>783.5537719726562 -947.731201171875 33.926944732666016 0.0 -0.0 0.2594667375087738</pose>
+      <visual name="smallbuoygrid.068_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.068_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.069">
+      <pose>788.8617553710938 -952.6532592773438 33.926944732666016 0.0 -0.0 0.2594667375087738</pose>
+      <visual name="smallbuoygrid.069_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.069_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.070">
+      <pose>794.3167724609375 -957.36328125 33.926944732666016 0.0 -0.0 0.33595848083496094</pose>
+      <visual name="smallbuoygrid.070_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.070_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.071">
+      <pose>799.9727172851562 -961.8903198242188 33.926944732666016 0.0 -0.0 0.33595848083496094</pose>
+      <visual name="smallbuoygrid.071_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.071_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.072">
+      <pose>805.6256713867188 -966.413330078125 33.926944732666016 0.0 -0.0 0.33595848083496094</pose>
+      <visual name="smallbuoygrid.072_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.072_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.073">
+      <pose>811.28662109375 -970.9443359375 33.926944732666016 0.0 -0.0 0.33595848083496094</pose>
+      <visual name="smallbuoygrid.073_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.073_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.074">
+      <pose>816.9706420898438 -975.414306640625 33.926944732666016 0.0 -0.0 0.36380401253700256</pose>
+      <visual name="smallbuoygrid.074_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.074_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.075">
+      <pose>822.7176513671875 -979.8113403320312 33.926944732666016 0.0 -0.0 0.3617246448993683</pose>
+      <visual name="smallbuoygrid.075_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.075_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.076">
+      <pose>828.4686279296875 -984.2113647460938 33.926944732666016 0.0 -0.0 0.3617246448993683</pose>
+      <visual name="smallbuoygrid.076_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.076_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.077">
+      <pose>834.2186279296875 -988.6104125976562 33.926944732666016 0.0 -0.0 0.3617246448993683</pose>
+      <visual name="smallbuoygrid.077_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.077_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.078">
+      <pose>840.1846313476562 -992.5433959960938 33.926944732666016 0.0 -0.0 0.497970849275589</pose>
+      <visual name="smallbuoygrid.078_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.078_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.079">
+      <pose>846.5066528320312 -996.0803833007812 33.926944732666016 0.0 -0.0 0.497970849275589</pose>
+      <visual name="smallbuoygrid.079_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.079_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.080">
+      <pose>852.8246459960938 -999.6153564453125 33.926944732666016 0.0 -0.0 0.497970849275589</pose>
+      <visual name="smallbuoygrid.080_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.080_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.081">
+      <pose>865.7266845703125 -1006.118408203125 33.926944732666016 0.0 -0.0 0.5609126091003418</pose>
+      <visual name="smallbuoygrid.081_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.081_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.082">
+      <pose>872.2366943359375 -1009.2784423828125 33.926944732666016 0.0 -0.0 0.5609126091003418</pose>
+      <visual name="smallbuoygrid.082_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.082_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.083">
+      <pose>878.750732421875 -1012.44140625 33.926944732666016 0.0 -0.0 0.5609126091003418</pose>
+      <visual name="smallbuoygrid.083_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.083_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.084">
+      <pose>885.2797241210938 -1015.5503540039062 33.926944732666016 0.0 -0.0 0.5751429796218872</pose>
+      <visual name="smallbuoygrid.084_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.084_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.085">
+      <pose>891.8417358398438 -1018.600341796875 33.926944732666016 0.0 -0.0 0.5751429796218872</pose>
+      <visual name="smallbuoygrid.085_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.085_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.086">
+      <pose>898.4117431640625 -1021.6533203125 33.926944732666016 0.0 -0.0 0.5751429796218872</pose>
+      <visual name="smallbuoygrid.086_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.086_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.087">
+      <pose>904.9766845703125 -1024.7042236328125 33.926944732666016 0.0 -0.0 0.5751429796218872</pose>
+      <visual name="smallbuoygrid.087_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.087_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.088">
+      <pose>911.5526123046875 -1027.76123046875 33.926944732666016 0.0 -0.0 0.5751429796218872</pose>
+      <visual name="smallbuoygrid.088_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.088_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.089">
+      <pose>918.20263671875 -1030.47216796875 33.926944732666016 0.0 -0.0 0.6715075969696045</pose>
+      <visual name="smallbuoygrid.089_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.089_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.090">
+      <pose>924.979736328125 -1033.0771484375 33.926944732666016 0.0 -0.0 0.6232771277427673</pose>
+      <visual name="smallbuoygrid.090_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.090_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.091">
+      <pose>931.65869140625 -1035.876220703125 33.926944732666016 0.0 -0.0 0.613301694393158</pose>
+      <visual name="smallbuoygrid.091_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.091_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.092">
+      <pose>938.335693359375 -1038.6732177734375 33.926944732666016 0.0 -0.0 0.613301694393158</pose>
+      <visual name="smallbuoygrid.092_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.092_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.093">
+      <pose>945.0106201171875 -1041.47021484375 33.926944732666016 0.0 -0.0 0.613301694393158</pose>
+      <visual name="smallbuoygrid.093_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.093_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.094">
+      <pose>951.691650390625 -1044.270263671875 33.926944732666016 0.0 -0.0 0.613301694393158</pose>
+      <visual name="smallbuoygrid.094_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.094_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.095">
+      <pose>958.37060546875 -1047.0352783203125 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.095_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.095_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.096">
+      <pose>965.0836181640625 -1049.752197265625 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.096_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.096_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.097">
+      <pose>971.7916259765625 -1052.4681396484375 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.097_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.097_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.098">
+      <pose>978.4986572265625 -1055.18310546875 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.098_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.098_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.099">
+      <pose>985.2166748046875 -1057.885009765625 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.099_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.099_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.100">
+      <pose>991.9337158203125 -1060.5869140625 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.100_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.100_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.101">
+      <pose>998.647705078125 -1063.286865234375 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.101_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.101_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.102">
+      <pose>1005.3697509765625 -1065.9898681640625 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.102_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.102_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.103">
+      <pose>1012.0867919921875 -1068.6907958984375 33.926944732666016 0.0 -0.0 0.6285614371299744</pose>
+      <visual name="smallbuoygrid.103_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.103_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.104">
+      <pose>1025.7117919921875 -1073.4638671875 33.926944732666016 0.0 -0.0 0.6927188038825989</pose>
+      <visual name="smallbuoygrid.104_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.104_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.105">
+      <pose>1032.579833984375 -1075.741943359375 33.926944732666016 0.0 -0.0 0.6927188038825989</pose>
+      <visual name="smallbuoygrid.105_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.105_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.106">
+      <pose>1039.452880859375 -1078.02197265625 33.926944732666016 0.0 -0.0 0.6927188038825989</pose>
+      <visual name="smallbuoygrid.106_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.106_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.107">
+      <pose>1046.3238525390625 -1080.302001953125 33.926944732666016 0.0 -0.0 0.6927188038825989</pose>
+      <visual name="smallbuoygrid.107_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.107_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.108">
+      <pose>1053.19287109375 -1082.5810546875 33.926944732666016 0.0 -0.0 0.6927188038825989</pose>
+      <visual name="smallbuoygrid.108_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.108_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid.007">
+      <pose>1064.82 -1086.64 33.9269 0 -0 0.7</pose>
+      <visual name="bigbuoygrid.007_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="bigbuoygrid.009">
+      <pose>1100.6317138671875 -1095.856201171875 33.926944732666016 0.0 -0.0 0.722335934638977</pose>
+      <visual name="bigbuoygrid.009_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.112">
+      <pose>1107.560791015625 -1097.9461669921875 33.926944732666016 0.0 -0.0 0.722335934638977</pose>
+      <visual name="smallbuoygrid.112_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.112_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.113">
+      <pose>1114.5517578125 -1099.537109375 33.926944732666016 0.0 -0.0 0.8659648895263672</pose>
+      <visual name="smallbuoygrid.113_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.113_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.114">
+      <pose>1121.7137451171875 -1100.6051025390625 33.926944732666016 0.0 -0.0 0.8659648895263672</pose>
+      <visual name="smallbuoygrid.114_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.114_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.115">
+      <pose>1128.8607177734375 -1101.80810546875 33.926944732666016 0.0 -0.0 0.8294277191162109</pose>
+      <visual name="smallbuoygrid.115_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.115_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.116">
+      <pose>1135.9757080078125 -1103.1322021484375 33.926944732666016 0.0 -0.0 0.8294277191162109</pose>
+      <visual name="smallbuoygrid.116_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.116_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.117">
+      <pose>1143.045654296875 -1104.8341064453125 33.926944732666016 0.0 -0.0 0.7292894124984741</pose>
+      <visual name="smallbuoygrid.117_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.117_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="bigbuoygrid">
+      <pose>1154.57 -1109.29 33.9269 0 -0 0.7</pose>
+      <visual name="bigbuoygrid_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/bigbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="bigbuoygrid_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>-1.857040 3.140529 2.596603 0 0 2.148923</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>14.789584 3.188850 5.200012</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+    </link>
+    <link name="smallbuoygrid.120">
+      <pose>757.788818359375 -922.401123046875 33.926944732666016 0.0 -0.0 0.14237326383590698</pose>
+      <visual name="smallbuoygrid.120_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.120_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="smallbuoygrid.121">
+      <pose>859.2246704101562 -1002.9453735351562 33.926944732666016 0.0 -0.0 0.5597385168075562</pose>
+      <visual name="smallbuoygrid.121_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/smallbuoygrid.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      
+      <collision name="smallbuoygrid.121_basebox">
+        <!-- Centro da malha no frame do link + orientação principal (yaw) -->
+        <pose>0.002917 -0.005491 2.073040 0 0 2.132364</pose>
+        <geometry>
+          <box>
+            <!-- Extensões do OBB (eixos alinhados ao yaw acima) -->
+            <size>7.501942 2.757460 4.146080</size>
+          </box>
+        </geometry>
+        <surface>
+          <contact>
+            <collide_bitmask>0x01</collide_bitmask>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <link name="full_dam">
+      <pose>-83.80331420898438 -27.26129150390625 21.67755126953125 0.0 -0.0 0.0</pose>
+      <visual name="full_dam_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/full_dam.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="full_dam_slice01_box">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/full_dam.dae</uri>
+            <scale>1.0283015966415405 1.0001990795135498 1.5001850128173828</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <link name="trunk">
+      <pose>0 0 0 0.0 -0.0 0.0</pose>
+      <visual name="trunk_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/trunk.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="trunk_basebox">
+        <geometry>      
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/trunk.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>          
+      </collision>
+    </link>
+    <link name="vegetation">
+      <pose>18.9482421875 2.2733154296875 -22.0 -0.0 0.0</pose>
+      <visual name="vegetation">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/vegetation.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="vegetation">
+      <pose>18.9482421875 2.2733154296875 -22.0 -0.0 0.0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/vegetation.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>
+    </link>
+    <link name="riverbed">
+      <pose>-53.3121337890625 -684.662109375 -30 0.0 -0.0 0.0</pose>
+      <visual name="riverbed_visual">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/riverbed.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="ref_circle_1">
+      <pose>-123.3 -1091.800000 70 0.0 -0.0 0.0</pose>
+      <visual name="ref_circle_1v">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="ref_circle_1c">
+        <pose>0 0 0.0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>      
+    </link>    
+    <link name="ref_circle_2">
+      <pose>-113.000000 -791.500000 70 0.0 0.0 0.0</pose>
+      <visual name="ref_circle_2v">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="ref_circle_2c">
+        <pose>0 0 0.0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>      
+    </link>         
+    <link name="ref_circle_3">
+      <pose>-102.0 -489.8 69.7 0.0 0.0 0.0</pose>
+      <visual name="ref_circle_3v">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="ref_circle_3c">
+        <pose>0 0 0.0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>      
+    </link>     
+    <link name="ref_circle_4">
+      <pose>1262.000000 -1125.000000 48.7 0.0 0.0 0.0</pose>
+      <visual name="ref_circle_4v">
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </visual>
+      <collision name="ref_circle_4c">
+        <pose>0 0 0.0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://SAE_HYDRO_V0/meshes/ref_circle.dae</uri>
+            <scale>1.0 1.0 1.0</scale>
+          </mesh>
+        </geometry>
+      </collision>      
+    </link>             
+    
+    
+<!--RITL TEST-->    
+<!--<plugin name="trunk_scaler" filename="libTrunkScaler.so">
+  <link_name>trunk</link_name>
+  <profile>linear_up</profile>
+  <scale_amplitude>0.5</scale_amplitude>
+  <cycle_seconds>10.0</cycle_seconds>
+  <run_duration>20.0</run_duration>
+  <profile_exp>1.0</profile_exp>
+  <noise_smoothing>0.3</noise_smoothing>
+  <start_delay>5.0</start_delay>  
+</plugin>
+
+<plugin name="vegetation_scaler" filename="libTrunkScaler.so">
+  <link_name>vegetation</link_name>
+  <profile>linear_up</profile>
+  <scale_amplitude>0.0001</scale_amplitude>
+  <scale_amp_x>0.5</scale_amp_x>
+  <scale_amp_y>0.5</scale_amp_y>
+  <scale_amp_z>1</scale_amp_z>  
+  <cycle_seconds>10.0</cycle_seconds>
+  <run_duration>20.0</run_duration>
+  <profile_exp>1.0</profile_exp>
+  <noise_smoothing>0.3</noise_smoothing>
+  <start_delay>5.0</start_delay>  
+</plugin>-->
+
+
+
+    
+  </model>
+</sdf>

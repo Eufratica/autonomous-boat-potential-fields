@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<!--<?xml version="1.0" ?>
+<robot name="ping360">-->
+  <xacro:macro name="ping360_mount" params="name:=ping360 ping360_imaging_enabled:=ping360_imaging_enabled">
+
+  <joint name="ping360__base_bluering_joint" type="fixed">
+    <parent link="ping360__base_link"/>
+    <child link="ping360__blue_ring_link"/>
+    <origin xyz="0    0    0.027" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>
+  <joint name="ping360__bluering_top_joint" type="fixed">
+    <parent link="ping360__blue_ring_link"/>
+    <child link="ping360__top_link"/>
+    <origin xyz="0   0   0.03" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>
+  <joint name="ping360__inner_disk_joint" type="revolute">
+    <parent link="ping360__blue_ring_link"/>
+    <child link="ping360__inner_disk"/>
+    <origin xyz="0    0    0.027" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1e+16" upper="1e+16" effort="0.0" velocity="0.0"/>
+  </joint>
+  <link name="ping360__base_link">
+    <inertial>
+      <mass value="0.100"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0023333" ixy="0" ixz="0" iyy="0.0023333" iyz="0" izz="0.0029794"/>
+    </inertial>
+   <!-- <collision name="ping360__collision">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.068" length="0.044"/>
+      </geometry>
+    </collision>-->
+    <visual name="ping360__visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.068" length="0.044"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="ping360__blue_ring_link">
+    <inertial>
+      <mass value="0.004"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.0001875" ixy="0" ixz="0" iyy="0.0001875" iyz="0" izz="0.0003147"/>
+    </inertial>
+   <!--  <collision name="ping360__collision">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.077" length="0.01"/>
+      </geometry>
+    </collision>-->
+    <visual name="ping360__visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.077" length="0.010"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="ping360__inner_disk">
+    <inertial>
+
+      <mass value="0.001"/>
+
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+
+      <inertia ixx="0.000046875" ixy="0" ixz="0" iyy="0.000046875" iyz="0" izz="0.003728475"/>
+
+    </inertial>
+    <visual name="ping360__visual">
+      <origin xyz="0     0    -0.027" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.030" length="0.010"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="ping360__top_link">
+    <inertial>
+      <mass value="0.070"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.01020831" ixy="0" ixz="0" iyy="0.01020831" iyz="0" izz="0.00875"/>
+    </inertial>
+   <!--  <collision name="ping360__collision">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.077" length="0.05"/>
+      </geometry>
+    </collision> -->
+    <visual name="ping360__visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.077" length="0.050"/>
+      </geometry>
+    </visual>
+  </link>
+
+
+    <xacro:if value="$(arg ping360_imaging_enabled)">
+      <gazebo reference="ping360__inner_disk">
+        <sensor name='MSISonar' type='camera'>
+            <pose>0 0 0.0 0 -3.14 0</pose>
+            <visualize>false</visualize>
+            <update_rate>100</update_rate>
+	    <plugin name="SonarVisual" filename="libMechanicalScanningImagingSonarGazebo.so" >
+		<update_rate>100</update_rate>
+		<local_rotation>0 0 0</local_rotation>
+		<topic>MSISonar</topic>
+		<debug>1</debug>
+		<axis_rotation>2</axis_rotation>
+		<angle_max>6.28</angle_max>
+		<angle_min>0.0</angle_min>
+		<axis_rotation>2</axis_rotation>
+		<angular_velocity>1.5</angular_velocity>
+		<link_reference>ping360__inner_disk</link_reference>
+		<hfov>0.035</hfov>
+		<vfov>0.436</vfov>
+		<bin_count>25</bin_count>
+		<beam_count>1</beam_count>
+		<image>
+		    <width>500</width>
+		    <height>500</height>
+		    <format>B8G8R8</format>
+		</image>
+		<sonar_output>
+		    <width>500</width>
+		    <height>500</height>
+		</sonar_output>
+		<clip>
+		    <near>0.75</near>
+		    <far>20</far>
+		</clip>
+		<noise>
+		    <type>gaussian</type>
+		    <mean>0.0</mean>
+		</noise>
+	    </plugin>  
+	</sensor>	 
+      </gazebo>
+    </xacro:if>
+    <xacro:unless value="$(arg ping360_imaging_enabled)">
+        <plugin name="ping_plugin" filename="libping_plugin.so">
+            <velocity>1.5</velocity>
+        </plugin>  
+    </xacro:unless>    
+    
+
+
+
+    <joint name="${name}_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="${name}__base_link"/>
+      <origin rpy="0 -3.14 0" xyz="0.1 0.0 -0.07"/>
+    </joint>
+    
+
+    
+
+</xacro:macro>  
+  
+</robot>

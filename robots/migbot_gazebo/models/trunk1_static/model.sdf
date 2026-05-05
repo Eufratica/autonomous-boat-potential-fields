@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="trunk1_static">
+    <static>1</static>
+    <link name="link">
+      <inertial>
+        <pose>0 0 -5 0 0 0</pose>
+        <!-- Mass determined based on buoyancy geometry so object 
+             floats at mid-point of sphere -->
+        <mass>20</mass>
+        <!-- Mark only - based on cylinder -->
+        <inertia>
+          <ixx>1.0</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1.0</iyy>
+          <iyz>0</iyz>
+          <izz>0.1</izz>
+        </inertia>
+      </inertial>
+      <collision name="crocodile_collision">
+        <pose>0 0 0 1.57 0 1.57</pose>      
+        <geometry>
+          <cylinder>
+	    <radius>0.38</radius>
+	    <length>2.10</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="crocodile_visual">
+        <pose>0 0 0 1.57 0 1.57</pose>      
+        <geometry>
+           <cylinder>
+             <radius>0.38</radius>
+             <length>2.10</length>
+           </cylinder>
+        </geometry>
+         <material>
+          <ambient>0.36 0.25 0.20 1</ambient> <!-- Cor marrom -->
+          <diffuse>0.36 0.25 0.20 1</diffuse> <!-- Cor marrom -->
+          <specular>0.1 0.1 0.1 1</specular> <!-- Reflexo fraco -->
+        </material>
+      </visual>
+
+    </link>
+
+  </model>
+</sdf>

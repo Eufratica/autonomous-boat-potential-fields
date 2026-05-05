@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.6">
+  <world name="madeira_river">
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>0</grid>
+      <origin_visual>0</origin_visual>
+    </scene>
+    <!-- Estimated latitude/longitude of madeira river
+	 from satellite imagery -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>-8.798638</latitude_deg>
+      <longitude_deg>-63.952087</longitude_deg>
+      <elevation>58.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <gui fullscreen="0">
+      <camera name='user_camera'>
+        <!--<pose>-54 25 160.0 0.0 0.3 0.17</pose>-->
+        <pose>40.413349 517.560364 4.951383 0 0.195999 -1.844095</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+      <!--<plugin name="GUITaskWidget" filename="libgui_task_widget.so"/>-->
+    </gui>
+    <include>
+      <!-- Note - the pose tag doesn't seem to work for heightmaps, so you need
+      to go into the model file to change the altitutde/height!-->
+      <pose>0 0 -36 0 0 0</pose>
+      <uri>model://SAE_HYDRO_V0</uri>
+    </include>
+        
+    <include>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://ocean_waves</uri>
+      <scale>10.0 10.0 10.0</scale>
+    </include>
+    
+<plugin name="WorldGpsAlignMavlink"
+        filename="libWorldGpsAlignMavlink.so">
+
+  <!-- Modelo principal onde estão os ref_circle_* -->
+  <environment_model>SAE_HYDRO_V0</environment_model>
+
+  <!-- Robô (NÃO é movido) -->
+  <robot_model>migbot1</robot_model>
+
+  <!-- Outros modelos do cenário a mover junto -->
+  <extra_model>ocean_waves</extra_model>
+
+  <!-- Se quiser travar a origem ENU, pode passar também: -->
+
+  <origin_lat>-8.798638</origin_lat>
+  <origin_lon>-63.952087</origin_lon>
+
+
+  <!-- GPS NavSatFix vindo do ArduPilot (MAVROS) -->
+  <gps_topic>/mavros/global_position/global</gps_topic>
+
+  <!-- Seus marcadores de ground truth -->
+  <ref>
+    <link_name>ref_circle_1</link_name>
+    <lat>-8.790076946506517</lat>
+    <lon>-63.95554218963202</lon>
+  </ref>
+  <ref>
+    <link_name>ref_circle_2</link_name>
+    <lat>-8.792664802944781</lat>
+    <lon>-63.954545642552944</lon>
+  </ref>
+  <ref>
+    <link_name>ref_circle_3</link_name>
+    <lat>-8.79520407803075</lat>
+    <lon>-63.953580838642715</lon>
+  </ref>
+  <ref>
+    <link_name>ref_circle_4</link_name>
+    <lat>-8.794862222659512</lat>
+    <lon>-63.96787507374759</lon>
+  </ref>
+
+</plugin>
+
+
+
+
+
+
+
+    
+    
+    
+  </world>
+</sdf>

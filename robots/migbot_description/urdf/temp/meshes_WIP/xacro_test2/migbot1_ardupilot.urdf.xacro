@@ -1,0 +1,226 @@
+<?xml version="1.0" ?>
+<robot name="migbot1_ardupilot">
+  <link name="helice1">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="helice3">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="helice2">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="helice4">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-1.5002675354480743e-05 4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-1.5002675354480743e-05 4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="helice6">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="helice5">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/helice.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="-1.5707963267948966 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.03959999978542328" length="0.7714560329914093"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="1.5002675354480743e-05 -4.023313522338867e-07 1.825392246246338e-07" rpy="0 0 0"/>
+      <mass value="2.280356"/>
+      <inertia ixx="0.113989" ixy="0.0" ixz="0.0" iyy="0.001788" iyz="0.0" izz="0.113989"/>
+    </inertial>
+  </link>
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="file:///home/ttrindader/SOFTX-MIG/github/ros_ws/src/xasv-sim/robots/migbot_description/urdf/temp/meshes_WIP/xacro_test2/meshes/base_link.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.3873106837272644 -0.5531401634216309 0.028419017791748047" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="0.3529626131057739 0.286358118057251 0.3340959846973419"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.3873105049133301 0.7467493414878845 0.028419017791748047" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="2.301753044128418 0.28635841608047485 0.3340959846973419"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.3873106837272644 -0.5555058121681213 0.028419017791748047" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="2.301753044128418 0.28635841608047485 0.3340959846973419"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.18785631656646729 0.09725365787744522 0.4897955358028412" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="1.4632989168167114 0.5223059058189392 0.30197805166244507"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.8694584369659424 0.09467645734548569 0.11676308512687683" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="0.0503227561712265 0.05002070218324661 0.4810780882835388"/>
+      </geometry>
+    </collision>
+    <collision>
+      <origin xyz="-0.5305383205413818 0.09467624872922897 0.1778692752122879" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+        <box size="0.09711700677871704 0.05002070963382721 0.3231997489929199"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.38731059432029724 0.09562176465988159 0.2510777935385704" rpy="0 0 0"/>
+      <mass value="1710.000440"/>
+      <inertia ixx="446.193056" ixy="0.0" ixz="0.0" iyy="841.541570" iyz="0.0" izz="1114.601226"/>
+    </inertial>
+  </link>
+  <joint name="helice1_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice1"/>
+    <origin xyz="1.0098435878753662 -0.5541407465934753 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <joint name="helice3_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice3"/>
+    <origin xyz="1.009843349456787 0.7462476491928101 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <joint name="helice2_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice2"/>
+    <origin xyz="-0.34517043828964233 0.746247410774231 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <joint name="helice4_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice4"/>
+    <origin xyz="-0.345170259475708 -0.5537497997283936 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <joint name="helice6_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice6"/>
+    <origin xyz="-0.7168805599212646 -0.5537497997283936 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <joint name="helice5_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="helice5"/>
+    <origin xyz="-0.7168807983398438 0.746498703956604 0.6604171991348267" rpy="0.0 -0.0 0.0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.05" friction="0.05"/>
+  </joint>
+  <link name="imu_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.012500"/>
+      <inertia ixx="0.000005" ixy="0.0" ixz="0.0" iyy="0.000005" iyz="0.0" izz="0.000005"/>
+    </inertial>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+</robot>

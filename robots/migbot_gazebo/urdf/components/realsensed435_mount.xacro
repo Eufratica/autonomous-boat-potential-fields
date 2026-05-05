@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- conversão graus->rad -->
+  <xacro:property name="deg_to_rad" value="0.01745329251994329577"/>
+
+  <!-- Macro simples para simular uma D435-like -->
+  <xacro:macro name="realsensed435_mount"
+               params="parent_link:=base_link
+                       name:=realsense
+                       x:=0.5 y:=0.0 z:=1.0
+                       roll:=0 pitch:=0 yaw:=0
+                       prefix:=realsense">
+
+    <!-- Link físico da câmera -->
+    <link name="${name}_link">
+      <inertial>
+        <!-- massa quase desprezível, não afeta a dinâmica do barco -->
+        <mass value="0.0001"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-5" ixy="0" ixz="0"
+                 iyy="1e-5" iyz="0"
+                 izz="1e-5"/>
+      </inertial>
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <!-- usa seu mesh da D435 -->
+          <mesh filename="package://migbot_gazebo/urdf/components/meshes/d435.dae"/>
+        </geometry>
+      </visual>
+
+      <!-- colisão simplificada só pra não atrapalhar -->
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.02 0.14 0.04"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Junta fixa no robô -->
+    <joint name="${name}_joint" type="fixed">
+      <parent link="${parent_link}"/>
+      <child  link="${name}_link"/>
+      <origin xyz="${x} ${y} ${z}" rpy="${roll} ${pitch} ${yaw}"/>
+    </joint>
+
+    <!-- Frame "lógico" da câmera (centro do depth) -->
+    <link name="${prefix}_depth_frame">
+      <!-- inércia mínima só pra manter a física estável -->
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1e-5"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0"
+                 iyy="1e-6" iyz="0"
+                 izz="1e-6"/>
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_depth_frame_joint" type="fixed">
+      <parent link="${name}_link"/>
+      <child  link="${prefix}_depth_frame"/>
+      <!-- alinhado com o link físico -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Frame rotacionado para alinhar Z-front / X-left / Y-up do Gazebo -->
+    <link name="${prefix}_depth_gazebo">
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1e-5"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0"
+                 iyy="1e-6" iyz="0"
+                 izz="1e-6"/>
+      </inertial>
+    </link>
+
+    <joint name="${prefix}_depth_gazebo_joint" type="fixed">
+      <parent link="${prefix}_depth_frame"/>
+      <child  link="${prefix}_depth_gazebo"/>
+      <!-- mesma rotação do truque do Kinect -->
+      <origin xyz="0 0 0"
+              rpy="-1.5707963267948966 0 -1.5707963267948966"/>
+    </joint>
+
+    <!-- ========================================= -->
+    <!-- Gazebo sensor + plugin OpenNI/Kinect      -->
+    <!-- ========================================= -->
+    <!-- IMPORTANTE: agora o sensor referencia o link FÍSICO -->
+    <gazebo reference="${name}_link">
+      <!-- tirar o turnGravityOff pra não bagunçar a dinâmica -->
+      <!-- <turnGravityOff>true</turnGravityOff> -->
+
+      <sensor type="depth" name="${prefix}_realsense_depth">
+        <always_on>true</always_on>
+        <update_rate>30</update_rate>
+
+        <camera>
+          <!-- FOV aproximado da D435 depth -->
+          <horizontal_fov>${85.2 * deg_to_rad}</horizontal_fov>
+          <vertical_fov>${58 * deg_to_rad}</vertical_fov>
+
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+
+          <clip>
+            <near>0.1</near>
+            <!-- far grande pro render; o corte da nuvem vem no plugin -->
+            <far>50.0</far>
+          </clip>
+        </camera>
+
+        <plugin name="${prefix}_kinect_controller"
+                filename="libgazebo_ros_openni_kinect.so">
+          <baseline>0.2</baseline>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+
+          <!-- namespace raiz da câmera -->
+          <cameraName>${prefix}</cameraName>
+
+          <!-- Tópicos de saída -->
+          <imageTopicName>color/image_raw</imageTopicName>
+          <cameraInfoTopicName>color/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>depth/image_rect_raw</depthImageTopicName>
+          <depthImageInfoTopicName>depth/camera_info</depthImageInfoTopicName>
+          <pointCloudTopicName>depth/color/points</pointCloudTopicName>
+
+          <!-- frame TF usado pelo plugin (já rotacionado) -->
+          <frameName>${prefix}_depth_gazebo</frameName>
+
+          <!-- CORTES DE FATO NA NUVEM -->
+          <pointCloudCutoff>0.2</pointCloudCutoff>
+          <pointCloudCutoffMax>10.0</pointCloudCutoffMax>
+
+          <!-- distorções ~zero -->
+          <distortionK1>0.00000001</distortionK1>
+          <distortionK2>0.00000001</distortionK2>
+          <distortionK3>0.00000001</distortionK3>
+          <distortionT1>0.00000001</distortionT1>
+          <distortionT2>0.00000001</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+</robot>
+

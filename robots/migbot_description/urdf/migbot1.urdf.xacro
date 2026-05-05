@@ -1,0 +1,540 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="migbot1">
+  
+
+  <!-- =========================
+       PROPRIEDADES (defaults)
+       ========================= -->
+  <!-- Escalas -->
+  <xacro:property name="S"   value="3.0"/>                 <!-- escala geométrica -->
+  <!-- Para ~92 kg totais com S=3: MUL ~= 0.728632765 -->
+  <xacro:property name="MUL" value="0.728632765"/>         <!-- fator extra de massa -->
+  <xacro:property name="Mscale" value="${MUL * S * S * S}"/>  <!-- massa ~ S^3 -->
+
+  <!-- Visual/meshes -->
+  <xacro:property name="mesh_dir" value="package://migbot_description/urdf/meshes_scaled"/>
+
+  <!-- Geometria nominal do casco (para inércia) -->
+  <xacro:property name="boat_length_nom" value="0.767"/>
+  <xacro:property name="boat_width_nom"  value="0.616"/>
+  <xacro:property name="hull_height_nom" value="0.200"/>  <!-- ajuste se necessário -->
+
+  <!-- Geometria escalada (plugins e inércia da caixa equivalente) -->
+  <xacro:property name="boat_length" value="${boat_length_nom * S}"/>
+  <xacro:property name="boat_width"  value="${boat_width_nom  * S}"/>
+  <xacro:property name="hull_height" value="${hull_height_nom * S}"/>
+
+  <!-- Fatores de inércia (ajustáveis) -->
+  <xacro:property name="I_BASE_FACTOR" value="0.25"/>  <!-- 0.15–0.35 costuma ficar bom -->
+  <xacro:property name="I_PROP_FACTOR" value="0.50"/>  <!-- hélices -->
+
+  <!-- Hidrodinâmica / bóia -->
+  <xacro:property name="fluid_density" value="997.8"/>
+  <xacro:property name="fluid_level"   value="0.001"/>
+  <xacro:property name="hull_radius"   value="${0.25 * S}"/>
+  <xacro:property name="wave_model"    value="ocean_waves"/>
+
+  <!-- GPS de referência -->
+  <xacro:property name="ref_lat" value="-8.798638"/>
+  <xacro:property name="ref_lon" value="-63.952087"/>
+  <xacro:property name="ref_alt" value="58"/>
+ 
+
+  <!-- Massas nominais (originais) -->
+  <xacro:property name="base_mass_nom" value="4.50244"/>
+  <xacro:property name="h_mass_nom"    value="0.024"/>
+  <xacro:property name="imu_mass_nom"  value="0.015"/>
+  <xacro:property name="mag_mass_nom"  value="0.015"/>
+
+  <!-- Massas finais -->
+  <xacro:property name="base_mass" value="${base_mass_nom * Mscale}"/>
+  <xacro:property name="h_mass"    value="${h_mass_nom    * 1}"/>
+  <xacro:property name="imu_mass"  value="${imu_mass_nom}"/>  <!-- sensores mantidos -->
+  <xacro:property name="mag_mass"  value="${mag_mass_nom}"/>
+
+  <!-- Inércia do CASCO: caixa equivalente (ajustada por I_BASE_FACTOR) -->
+  <xacro:property name="Ixx_box" value="${ (1.0/12.0) * base_mass * (boat_width*boat_width + hull_height*hull_height) }"/>
+  <xacro:property name="Iyy_box" value="${ (1.0/12.0) * base_mass * (boat_length*boat_length + hull_height*hull_height) }"/>
+  <xacro:property name="Izz_box" value="${ (1.0/12.0) * base_mass * (boat_length*boat_length + boat_width*boat_width) }"/>
+
+  <xacro:property name="ixx" value="${I_BASE_FACTOR * Ixx_box}"/>
+  <xacro:property name="iyy" value="${I_BASE_FACTOR * Iyy_box}"/>
+  <xacro:property name="izz" value="${I_BASE_FACTOR * Izz_box}"/>
+  <xacro:property name="ixy" value="0.0"/>
+  <xacro:property name="ixz" value="0.0"/>
+  <xacro:property name="iyz" value="0.0"/>
+
+  <!-- CoM do casco (0 por padrão para não enviesar a visualização) -->
+  <xacro:property name="COM_X" value="0.0"/>
+  <xacro:property name="COM_Y" value="0.0"/>
+  <xacro:property name="COM_Z" value="0.4"/>
+
+  <!-- Hélices: parâmetros geométricos e inércia como DISCO FINO -->
+  <xacro:property name="prop_r" value="${0.15  * S}"/>
+  <xacro:property name="prop_L" value="${0.001 * S}"/>
+
+  <!-- disco fino: Izz = 1/2 m r^2 ; Ixx=Iyy = 1/4 m r^2 + 1/12 m L^2 -->
+  <xacro:property name="H_Ixx_raw" value="${ 0.25*h_mass*prop_r*prop_r + (1.0/12.0)*h_mass*prop_L*prop_L }"/>
+  <xacro:property name="H_Izz_raw" value="${ 0.5 *h_mass*prop_r*prop_r }"/>
+
+  <xacro:property name="h_ixx" value="${I_PROP_FACTOR * H_Ixx_raw}"/>
+  <xacro:property name="h_iyy" value="${I_PROP_FACTOR * H_Ixx_raw}"/>
+  <xacro:property name="h_izz" value="${I_PROP_FACTOR * H_Izz_raw}"/>
+  <xacro:property name="h_ixy" value="0.0"/>
+  <xacro:property name="h_ixz" value="0.0"/>
+  <xacro:property name="h_iyz" value="0.0"/>
+
+  <!-- Colisão simples das hélices -->
+  <xacro:property name="h_col_r" value="${prop_r}"/>
+  <xacro:property name="h_col_L" value="${prop_L}"/>
+
+  <!-- Limites das juntas -->
+  <xacro:property name="j_effort" value="100.0"/>
+  <xacro:property name="j_vel"    value="100.0"/>
+  <xacro:property name="j_lo"     value="-1.79769e+308"/>
+  <xacro:property name="j_up"     value="1.79769e+308"/>
+
+  <!-- =========================
+       MACRO: HÉLICE (xyz do joint com escala)
+       ========================= -->
+  <xacro:macro name="helice"
+               params="idx x y z rpy visual_rpy mesh turn motor_topic_idx">
+    <link name="Helice_${idx}">
+      <inertial>
+        <mass value="${h_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="${h_ixx}" ixy="${h_ixy}" ixz="${h_ixz}"
+                 iyy="${h_iyy}" iyz="${h_iyz}" izz="${h_izz}"/>
+      </inertial>
+      <collision name="Helice_${idx}_collision">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="${h_col_r}" length="${h_col_L}"/>
+        </geometry>
+      </collision>
+      <visual name="Helice_${idx}_visual">
+        <origin xyz="0 0 0" rpy="${visual_rpy}"/>
+        <geometry>
+          <mesh filename="${mesh}" scale="${S} ${S} ${S}"/>
+        </geometry>
+      </visual>
+    </link>
+
+    <joint name="Engine_helice_${idx}" type="revolute">
+      <parent link="base_link"/>
+      <child link="Helice_${idx}"/>
+      <origin xyz="${x*S} ${y*S} ${z*S}" rpy="${rpy}"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="${j_effort}" lower="${j_lo}" upper="${j_up}" velocity="${j_vel}"/>
+    </joint>
+
+    <gazebo>
+      <plugin name="motor${idx}_model" filename="libgazebo_motor_model.so">
+        <robotNamespace>${namespace}</robotNamespace>
+        <jointName>Engine_helice_${idx}</jointName>
+        <linkName>Helice_${idx}</linkName>
+        <turningDirection>${turn}</turningDirection>
+        <timeConstantUp>0.0125</timeConstantUp>
+        <timeConstantDown>0.025</timeConstantDown>
+        <maxRotVelocity>110000</maxRotVelocity>
+        <motorConstant>1e-02</motorConstant>
+        <momentConstant>0.01</momentConstant>
+        <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+        <motorNumber>1</motorNumber>
+        <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+        <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+        <motorSpeedPubTopic>/motor_speed/${motor_topic_idx}</motorSpeedPubTopic>
+        <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+      </plugin>
+    </gazebo>
+    
+  <!-- transmissions só quando o controle é via ROS (não via ArduPilot) -->
+  <xacro:unless value="${ardupilot}">
+    <transmission name="Engine_helice_${idx}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <actuator name="Engine_helice_${idx}_act">
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+      <joint name="Engine_helice_${idx}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+    </transmission>
+  </xacro:unless>  
+
+
+  </xacro:macro>
+
+  <!-- =========================
+       BASE LINK
+       ========================= -->
+  <link name="base_link">
+    <inertial>
+      <mass value="${base_mass}"/>
+      <origin xyz="${COM_X} ${COM_Y} ${COM_Z}" rpy="0 0 0"/>
+      <inertia ixx="${ixx}" ixy="${ixy}" ixz="${ixz}"
+               iyy="${iyy}" iyz="${iyz}" izz="${izz}"/>
+    </inertial>
+    <collision name="base_link_collision">
+      <origin xyz="0 0 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="${mesh_dir}/Barco.dae" scale="${S} ${S} ${S}"/>
+      </geometry>
+    </collision>
+    <visual name="base_link_visual">
+      <origin xyz="0 0 0" rpy="0 0 3.14"/>
+      <geometry>
+        <mesh filename="${mesh_dir}/Barco.dae" scale="${S} ${S} ${S}"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- =========================
+       HÉLICES (xyz escalado)
+       ========================= -->
+  <xacro:helice idx="1" x="0.27"  y="-0.26" z="0.37"
+                rpy="0 1.57075 0"
+                visual_rpy="1.57075 0 1.57075"
+                mesh="${mesh_dir}/helice_frente.dae"
+                turn="ccw" motor_topic_idx="1"/>
+
+  <xacro:helice idx="2" x="-0.19" y="0.26"  z="0.35"
+                rpy="0 1.5708 0"
+                visual_rpy="1.57075 0 1.57075"
+                mesh="${mesh_dir}/helice_fundo.dae"
+                turn="ccw" motor_topic_idx="1"/>
+
+  <xacro:helice idx="3" x="0.27"  y="0.26"  z="0.37"
+                rpy="0 1.5708 0"
+                visual_rpy="1.57075 0 1.57075"
+                mesh="${mesh_dir}/helice_frente.dae"
+                turn="cw"  motor_topic_idx="2"/>
+
+  <xacro:helice idx="4" x="-0.19" y="-0.26" z="0.35"
+                rpy="0 1.5708 0"
+                visual_rpy="1.57075 0 1.57075"
+                mesh="${mesh_dir}/helice_fundo.dae"
+                turn="cw"  motor_topic_idx="3"/>
+
+  <xacro:helice idx="5" x="-0.29" y="0.26"  z="0.35"
+                rpy="0 1.5708 -3.14"
+                visual_rpy="-1.57075 0 -1.57075"
+                mesh="${mesh_dir}/helice_fundo.dae"
+                turn="ccw" motor_topic_idx="4"/>
+
+  <xacro:helice idx="6" x="-0.29" y="-0.26" z="0.35"
+                rpy="0 1.5708 -3.14"
+                visual_rpy="-1.57075 0 -1.57075"
+                mesh="${mesh_dir}/helice_fundo.dae"
+                turn="cw"  motor_topic_idx="5"/>
+
+  <!-- =========================
+       SENSORES (IMU / MAG / GPS)
+       ========================= -->
+  <link name="imu_link">
+    <inertial>
+      <mass value="${imu_mass}"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.00532259139" ixy="0" ixz="0"
+               iyy="0.00363239675" iyz="-0.00067637070" izz="0.00234468738"/>
+    </inertial>
+    <sensor name="imu_sensor_inline" type="imu">
+      <pose>0 0 0 3.141593 0 0</pose>
+    </sensor>
+  </link>
+
+  <joint name="imu_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin rpy="0 0 0" xyz="-0.01 0.002 0.082"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="0.0" lower="0" upper="0" velocity="0"/>
+    <dynamics damping="0.7" friction="0" spring_reference="0" spring_stiffness="0"/>
+  </joint>
+
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>1000</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu_data</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 3.141593 0 0</pose>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="quadrotor_imu_sim" filename="libhector_gazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>/imu</topicName>
+      <gaussianNoise>1.3e-5 1.3e-5 1.3e-5</gaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="quadrotor_magnetic_sim" filename="libhector_gazebo_ros_magnetic.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>100.0</updateRate>
+      <referenceHeading>-90</referenceHeading>
+      <declination>-13.9794</declination>
+      <inclination>-2.0879</inclination>
+      <bodyName>base_link</bodyName>
+      <topicName>/magnetic</topicName>
+      <magnitude>400.0</magnitude>
+      <offset>0 0 0</offset>
+      <drift>0.0 0.0 0.0</drift>
+      <gaussianNoise>1.3e-5 1.3e-5 1.3e-5</gaussianNoise>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="quadrotor_gps_sim" filename="libhector_gazebo_ros_gps.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>10.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>/fix</topicName>
+      <velocityTopicName>/fix_velocity</velocityTopicName>
+      <drift>0.0 0.0 0.0</drift>
+      <gaussianNoise>0.01 0.01 0.01</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.01 0.01 0.01</velocityGaussianNoise>
+      <referenceLatitude>${ref_lat}</referenceLatitude>
+      <referenceLongitude>${ref_lon}</referenceLongitude>
+      <referenceHeading>-90</referenceHeading>
+      <referenceAltitude>${ref_alt}</referenceAltitude>
+    </plugin>
+  </gazebo>
+
+  <link name="mag_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="3.141593 0 0"/>
+      <mass value="${mag_mass}"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+    <visual name="mag_vis">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.01 0.01 0.01"/></geometry>
+    </visual>
+    <collision name="mag_col">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.01 0.01 0.01"/></geometry>
+    </collision>
+  </link>
+  <joint name="mag_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="mag_link"/>
+    <origin xyz="0.1 0.1 0.1" rpy="0 0 0"/>
+  </joint>
+
+  <!-- =========================
+       DINÂMICA USV / BOIÂNCIA / FOLLOW
+       ========================= -->
+  <gazebo>
+    <plugin name="usv_dynamics_plugin" filename="libgazebo_usv_dynamics_plugin.so">
+      <bodyName>base_link</bodyName>
+      <waterLevel>-0.15</waterLevel>
+      <waterDensity>${fluid_density}</waterDensity>
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+      <xU>31.3</xU>
+      <xUU>42.4</xUU>
+      <yV>40.0</yV>
+      <yVV>0.0</yVV>
+      <zW>480.0</zW>
+      <kP>50.0</kP>
+      <mQ>50.0</mQ>
+      <nR>380.0</nR>
+      <nRR>0.0</nRR>
+      <hullRadius>${hull_radius}</hullRadius>
+      <boatWidth>${boat_width}</boatWidth>
+      <boatLength>${boat_length}</boatLength>
+      <length_n>2</length_n>
+      <wave_model>${wave_model}</wave_model>
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="base_link">
+    <plugin name="MigbotBuoyancyPlugin" filename="libbuoyancy_gazebo_plugin.so">
+      <wave_model>${wave_model}</wave_model>
+      <fluid_density>${fluid_density}</fluid_density>
+      <fluid_level>${fluid_level}</fluid_level>
+      <linear_drag>1.0</linear_drag>
+      <angular_drag>1.0</angular_drag>
+      <buoyancy name="buoyancy_box">
+        <link_name>base_link</link_name>
+        <pose>0 0 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>${0.2*S} ${0.1*S} ${0.05*S}</size>
+          </box>
+        </geometry>
+      </buoyancy>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="MigbotFollowPlugin" filename="libfollow_plugin.so">
+      <link_name>base_link</link_name>
+      <loop_forever>1</loop_forever>
+      <line>
+        <direction>0</direction>
+        <length>1</length>
+        <force>0</force>
+        <torque>0</torque>
+      </line>
+      <frame>world</frame>
+    </plugin>
+  </gazebo>
+
+  <!-- =========================
+       ROS CONTROL / JOINT STATES
+       ========================= -->
+  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <robotNamespace>${namespace}</robotNamespace>
+      <jointName>
+        Engine_helice_1,
+        Engine_helice_2,
+        Engine_helice_3,
+        Engine_helice_4,
+        Engine_helice_5,
+        Engine_helice_6
+      </jointName>
+    </plugin>
+  </gazebo>
+  
+  <xacro:unless value="${ardupilot}">
+    <gazebo>
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <robotNamespace>${namespace}</robotNamespace>
+        <legacyModeNS>true</legacyModeNS>
+        <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      </plugin>
+    </gazebo>
+  </xacro:unless>  
+
+   
+  <!-- Ardupilot plugin -->
+  <xacro:if value="${ardupilot}">
+   <gazebo>
+    <plugin name="arducopter_plugin" filename="libArduPilotPlugin.so">
+      <fdm_addr>127.0.0.1</fdm_addr> 
+      <fdm_port_in>9002</fdm_port_in>
+      <fdm_port_out>9003</fdm_port_out>   
+           
+      <modelXYZToAirplaneXForwardZDown>0 0  0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+      <gazeboXYZToNED>0 0 0 3.141593 0 -1.57075</gazeboXYZToNED>
+      <imuName>imu_sensor</imuName> 
+      <gpsName>gpssensor</gpsName>   
+      <magName>magsensor</magName> 
+      <!-- <barName>barsensor</barName>  -->
+        
+      <connectionTimeoutMaxCount>50</connectionTimeoutMaxCount>
+      
+      <control channel="0">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_1</jointName>
+        <multiplier>100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel="1">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_2</jointName>
+        <multiplier>100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel="2">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_3</jointName>
+        <multiplier>-100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel="3">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_4</jointName>
+        <multiplier>-100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel="4">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_5</jointName>
+        <multiplier>100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>
+      <control channel="5">
+        <type>EFFORT</type>
+        <offset>0</offset>
+        <p_gain>0.20</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>0</d_gain>
+        <i_max>0</i_max>
+        <i_min>0</i_min>
+        <cmd_max>2.5</cmd_max>
+        <cmd_min>-2.5</cmd_min>
+        <jointName>Engine_helice_6</jointName>
+        <multiplier>-100</multiplier>
+        <controlVelocitySlowdownSim>1</controlVelocitySlowdownSim>
+      </control>       
+    </plugin> 
+   </gazebo>
+   </xacro:if>
+   
+   
+   
+
+
+
+</robot>
+

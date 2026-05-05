@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>migbot_description</name>
+  <version>0.0.0</version>
+  <description>URDF/Xacro description of the migbot ASV used in xasv-sim.</description>
+
+  <maintainer email="---@---.com">---</maintainer>
+  <author email="---@---.com">---</author>
+  <license>Apache-2.0</license>
+
+  <url type="website">---</url>
+  <url type="repository">---</url>
+
+  <!-- Catkin build system -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Xacro is required to process the robot description -->
+  <build_depend>xacro</build_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <!--
+    Runtime tools that are typically used together with a robot description.
+    Declaring them here allows rosdep to install them automatically.
+  -->
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+
+  <!--
+    Gazebo / ROS packages that provide native plugins referenced in the robot
+    SDF/URDF files (e.g. IMU, GPS, magnetic sensor, ros_control).
+    These are not needed to build this package, but are required at runtime
+    when the robot is spawned in Gazebo.
+  -->
+  <exec_depend>gazebo_plugins</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>hector_gazebo_plugins</exec_depend>
+
+  <export>
+    <!-- No special export tags required for this description package -->
+  </export>
+</package>
+

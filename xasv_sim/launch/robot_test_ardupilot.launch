@@ -1,0 +1,64 @@
+<launch>
+  <!-- Gazebo world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find xasv_sim)/worlds/empty_river.world"/>
+    <arg name="verbose" value="true"/>
+    <arg name="paused" value="false"/>
+  </include>
+
+  <!-- Namespace do robô -->
+  <arg name="namespace" default="migbot1"/>
+  <arg name="robot_name" default="$(arg namespace)"/>
+
+  <!-- Pose inicial -->
+  <!--<arg name="x" default="522.079000"/>
+  <arg name="y" default="-754.948000"/>
+  <arg name="z" default="0"/>
+  <arg name="P" default="0"/>
+  <arg name="R" default="0"/>
+  <arg name="Y" default="3.14"/>-->
+  
+  <arg name="x" default="0"/>
+  <arg name="y" default="0"/>
+  <arg name="z" default="0"/>
+  <arg name="P" default="0"/>
+  <arg name="R" default="0"/>
+  <arg name="Y" default="0"/>
+
+  <!-- Flags -->
+  <arg name="camera_enabled" default="false"/>
+  <arg name="ground_truth_enabled" default="false"/>
+  <arg name="livox_enabled" default="false"/>
+  <arg name="ping360_enabled" default="false"/>
+  <arg name="imaging" default="false"/>
+
+  <!-- URDF/Xacro -->
+  <arg name="urdf" default="$(find migbot_gazebo)/urdf/migbot_gazebo_ardupilot.urdf.xacro"/>
+
+  <!-- TUDO no mesmo namespace -->
+  <group ns="$(arg namespace)">
+
+    <!-- /<ns>/robot_description -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder $(arg urdf) namespace:=$(arg namespace) robot_name:=$(arg robot_name) imaging:=$(arg imaging) livox_enabled:=$(arg livox_enabled) ping360_enabled:=$(arg ping360_enabled) camera_enabled:=$(arg camera_enabled) ground_truth_enabled:=$(arg ground_truth_enabled)"/>
+
+    <!-- Spawn no Gazebo lendo esse param (propaga ns ao modelo/plugins) -->
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model"
+          args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)
+                -urdf -param robot_description -model $(arg robot_name)
+                -robot_namespace $(arg namespace)"/>
+
+    <!-- TFs estáticos -->
+    <node pkg="tf" type="static_transform_publisher" name="livox_tf"
+          args="-0.37 0.0 -0.3 0 0 0 base_link livox 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="ping_tf"
+          args="0 0 -20 0 0 0 base_link sonar_frame 100"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+ 
+
+  </group>
+
+</launch>
+

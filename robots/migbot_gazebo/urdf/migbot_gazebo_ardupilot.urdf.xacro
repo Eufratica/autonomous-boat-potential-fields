@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!-- Basic WAM-V with gazebo plugins for dynamics -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="migbot0">
+  <xacro:arg name="camera_enabled" default="true" />
+  <xacro:arg name="gps_enabled" default="false" />
+  <xacro:arg name="imu_enabled" default="false" />
+  <xacro:arg name="sonar_enabled" default="false" />
+  <xacro:arg name="lidar_enabled" default="false" />
+  <xacro:arg name="livox_enabled" default="true" />
+  <xacro:arg name="ground_truth_enabled" default="false" />
+  <xacro:arg name="vrx_sensors_enabled" default="false" />
+  <xacro:arg name="camera_namespace" default="cameras/"/>  
+  <xacro:arg name="sensor_namespace" default="sensors/"/>
+  <!-- Note: this is only used for some sensors that do not correctly use the 
+  robotNamespace parameter -->
+  <xacro:arg name="namespace" default=""/>    
+  <xacro:property name="camera_namespace" value="$(arg camera_namespace)" scope="global" />
+  <xacro:property name="sensor_namespace" value="$(arg sensor_namespace)" scope="global" />
+  <xacro:property name="namespace" value="$(arg namespace)" scope="global" />      
+  
+  <!-- Sensor yaml file -->
+  <xacro:arg name="yaml_component_generation" default="false"/>
+  <xacro:arg name="component_xacro_file" default = ""/> 
+
+  <!-- === The WAM-V platform === -->
+  <xacro:include filename="$(find migbot_gazebo)/urdf/migbot_gazebo_ardupilot.xacro"/> 
+  
+
+  <!-- === Sensors === -->
+  <!-- Use sensor yaml file if given 
+  <xacro:if value="$(arg yaml_component_generation)">
+    <xacro:include filename="$(arg component_xacro_file)"/>
+    <xacro:yaml_components />
+  </xacro:if> -->
+  
+  <!-- Otherwise, add sensors based on enable variables 
+  <xacro:unless value="$(arg yaml_component_generation)"> -->
+
+    <!-- Add a front camera  -->
+    <xacro:if value="$(arg camera_enabled)">
+      <xacro:wamv_camera name="front_camera" y="0" x="0.6" z="0.6" P="${radians(0)}" />
+    </xacro:if> 
+    
+    <!-- Add simulated GPS -->
+    <xacro:if value="$(arg gps_enabled)">
+      <xacro:wamv_gps name="gps_wamv" x="0" />
+    </xacro:if> 
+    
+    <!-- Add Simulated IMU -->
+    <xacro:if value="$(arg imu_enabled)">
+      <xacro:wamv_imu name="imu_wamv" y="0.0" />
+    </xacro:if> 
+    
+    <!-- Add Simulated Sonar -->
+    <xacro:if value="$(arg sonar_enabled)">
+	<xacro:sonar_sensor name="sonar_sensor" parent="base_link" ros_topic="sonar" update_rate="15" min_range="0.75" max_range="50.0" field_of_view="${25*3.14/180}" ray_count="3" >
+	  <origin xyz="0.97 0 -0.1" rpy="0 1.57 0"/>
+	</xacro:sonar_sensor>
+    </xacro:if> 
+    
+
+    <!-- Add MID-70 LIDAR --> 
+    <xacro:if value="$(arg livox_enabled)">
+        <xacro:Livox_Mid70_mount name="livox" />
+    </xacro:if> 
+
+    <!-- Add 3D LIDAR  --> 
+    <xacro:if value="$(arg lidar_enabled)">
+      <xacro:lidar name="lidar_wamv" x="0.6" y="0.0" z="0.62" type="16_beam"/>
+    </xacro:if> 
+    
+    <!-- Add P3D ground truth --> 
+    <xacro:if value="$(arg ground_truth_enabled)">
+      <xacro:wamv_p3d name="p3d_wamv"/>
+    </xacro:if> 
+
+   
+    <!-- ==== VRX sensor configuration ==== 
+    <xacro:if value="$(arg vrx_sensors_enabled)">-->
+    
+    
+      <!-- Add a stereo camera pair 
+      <xacro:wamv_camera name="front_left_camera" y="0.1" x="0.75" P="${radians(15)}" />
+      <xacro:wamv_camera name="front_right_camera" y="-0.1" x="0.75" P="${radians(15)}" />-->
+    
+      <!-- Add a camera facing right 
+      <xacro:wamv_camera name="middle_right_camera" y="-0.45" P="${radians(15)}" Y="${radians(-90)}" post_Y="${radians(-90)}" /> -->
+    
+      <!-- Add simulated GPS 
+      <xacro:wamv_gps name="gps_wamv" x="-0.85" /> -->
+    
+      <!-- Add Simulated IMU 
+      <xacro:wamv_imu name="imu_wamv" y="-0.2" /> -->
+    
+      <!-- Add 3D LIDAR 
+      <xacro:lidar name="lidar_wamv" type="16_beam"/> -->
+
+
+    <!--</xacro:if>-->
+  <!-- </xacro:unless> -->
+
+</robot>

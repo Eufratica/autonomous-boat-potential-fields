@@ -1,0 +1,252 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="Huitl_OA">
+  
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>0</grid>
+      <origin_visual>0</origin_visual>
+    </scene>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+   
+   
+    <include>
+      <pose>0 0 0 0 0 4</pose>    
+      <uri>model://ocean_waves</uri>
+    </include>   
+    
+   <!-- <include>
+      <pose>0 0 -0.10 0 0 0</pose>    
+      <uri>model://ground_plane</uri>
+    </include>-->
+
+    <gui fullscreen="0">
+      <camera name='user_camera'>
+        <!--<pose>-54 25 160.0 0.0 0.3 0.17</pose>-->
+        <pose>-40.679443 -1.559169 14.529057 0 0.259643 0.176197</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+      <!--<plugin name="GUITaskWidget" filename="libgui_task_widget.so"/>-->
+    </gui>
+
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>-21.7783690</latitude_deg>
+      <longitude_deg>-43.3697018</longitude_deg>
+      <elevation>90</elevation>
+    </spherical_coordinates>
+    
+
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_1</name>
+        <pose>10 10 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_2</name>
+        <pose>74 15 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_3</name>
+        <pose>138 10 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_4</name>
+        <pose>202 15 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_5</name>
+        <pose>266 10 0 0 0 0</pose>
+      </include>
+      
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_6</name>
+        <pose>36 15 0 0 0 -3</pose>
+      </include>
+      
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_7</name>
+        <pose>80 10 0 0 0 0</pose>
+      </include>      
+
+
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_8</name>
+        <pose>120 15 0 0 0 0</pose>
+      </include>      
+      
+       <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_9</name>
+        <pose>160 10 0 0 0 0</pose>
+      </include>      
+  
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_10</name>
+        <pose>200 15 0 0 0 0</pose>
+      </include>      
+ 
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_11</name>
+        <pose>10 25 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_12</name>
+        <pose>74 30 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_13</name>
+        <pose>138 25 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_14</name>
+        <pose>202 30 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_15</name>
+        <pose>266 25 0 0 0 0</pose>
+      </include>
+       <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_15n</name>
+        <pose>40 30 0 0 0 0</pose>
+      </include>
+           
+ 
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_16</name>
+        <pose>15 6 0 0 0 -3</pose>
+      </include>
+      
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_17</name>
+        <pose>80 25 0 0 0 0</pose>
+      </include>      
+
+
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_18</name>
+        <pose>120 30 0 0 0 0</pose>
+      </include>      
+      
+       <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_19</name>
+        <pose>160 25 0 0 0 0</pose>
+      </include>      
+  
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_20</name>
+        <pose>200 30 0 0 0 0</pose>
+      </include>   
+      
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_21</name>
+        <pose>10 50 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_22</name>
+        <pose>74 45 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_23</name>
+        <pose>138 50 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_24</name>
+        <pose>202 45 0 0 0 0</pose>
+      </include>
+      <include>
+        <uri>model://branche1_buoy</uri>
+        <name>buoy_25</name>
+        <pose>266 50 0 0 0 0</pose>
+      </include>
+      
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_26</name>
+        <pose>40 45 0 0 0 0</pose>
+      </include>
+      
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_27</name>
+        <pose>80 50 0 0 0 0</pose>
+      </include>      
+  
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_28</name>
+        <pose>120 45 0 0 0 0</pose>
+      </include>      
+      
+       <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_29</name>
+        <pose>160 50 0 0 0 0</pose>
+      </include>      
+  
+      <include>
+        <uri>model://trunk2_buoy</uri>
+        <name>buoy_30</name>
+        <pose>200 45 0 0 0 0</pose>
+      </include>            
+
+
+    <!--<plugin filename="libgazebo_wind_plugin.so" name="wind_plugin">
+      <frameId>migbot1_scaled::base_link</frameId>
+      <robotNamespace/>
+      <windVelocityMean>1.0</windVelocityMean>
+      <windVelocityMax>20.0</windVelocityMax>
+      <windVelocityVariance>0</windVelocityVariance>
+      <windDirectionMean>0 1 0</windDirectionMean>
+      <windDirectionVariance>0</windDirectionVariance>
+      <windGustStart>10</windGustStart>
+      <windGustDuration>0</windGustDuration>
+      <windGustVelocityMean>0</windGustVelocityMean>
+      <windGustVelocityMax>20.0</windGustVelocityMax>
+      <windGustVelocityVariance>0</windGustVelocityVariance>
+      <windGustDirectionMean>1 0 0</windGustDirectionMean>
+      <windGustDirectionVariance>0</windGustDirectionVariance>
+      <windPubTopic>world_wind</windPubTopic>
+    </plugin>-->
+
+  <!-- Automatic launch obstacles -->  
+    <plugin name="trunk2_buoy_spawner" filename="libBuoySpawner.so">
+      <robot_name>migbot1</robot_name>
+      <model_name>trunk2_buoy</model_name>
+      <spawn_period>20.0</spawn_period>     <!-- em segundos -->
+      <spawn_distance>20.0</spawn_distance> <!-- em metros à frente -->
+    </plugin>
+
+  </world>
+</sdf>
+

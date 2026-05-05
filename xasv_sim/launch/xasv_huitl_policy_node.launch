@@ -1,0 +1,67 @@
+<launch>
+    <!-- vim: set ft=xml noet : -->
+    <!-- example launch script for ArduPilot based FCU's -->
+
+    <!-- em vez de default="screen", usa "log" -->
+    <arg name="fcu_url" default="udp://127.0.0.1:14552@127.0.0.1:14552" />
+    <arg name="gcs_url" default="" />
+    <arg name="tgt_system" default="1" />
+    <arg name="tgt_component" default="1" />
+    <!-- AQUI: trocar para log -->
+    <arg name="log_output" default="log" />
+    <arg name="fcu_protocol" default="v2.0" />
+    <arg name="respawn_mavros" default="false" />
+
+    <include file="$(find mavros)/launch/node.launch">
+        <arg name="pluginlists_yaml" value="$(find mavros)/launch/apm_pluginlists.yaml" />
+        <arg name="config_yaml" value="$(find mavros)/launch/apm_config.yaml" />
+        <arg name="fcu_url" value="$(arg fcu_url)" />
+        <arg name="gcs_url" value="$(arg gcs_url)" />
+        <arg name="tgt_system" value="$(arg tgt_system)" />
+        <arg name="tgt_component" value="$(arg tgt_component)" />
+        <!-- E aqui continua passando o mesmo arg -->
+        <arg name="log_output" value="$(arg log_output)" />
+        <arg name="fcu_protocol" value="$(arg fcu_protocol)" />
+        <arg name="respawn_mavros" value="$(arg respawn_mavros)" />
+    </include>
+
+    <node pkg="xasv_sim"
+          type="xasv_huitl_policy_node.py"
+          name="xasv_huitl_policy_node"
+          output="screen">
+
+      <param name="pose_topic"   value="/mavros/local_position/pose"/>
+      <param name="vel_topic"    value="/mavros/local_position/velocity_local"/>
+      <param name="state_topic"  value="/mavros/state"/>
+      <param name="global_topic" value="/mavros/global_position/global"/>
+      <param name="wp_topic"     value="/mavros/setpoint_raw/target_global"/>
+      <param name="collision_topic" value="/xasv/collision_flag"/>
+
+      <param name="rc_override_topic" value="/mavros/rc/override"/>
+      <param name="throttle_idx" value="2"/>  <!-- RC3 -->
+      <param name="yaw_idx"      value="0"/>  <!-- RC1 -->
+
+      <param name="safe_dist"        value="10.0"/>
+      <param name="min_valid_range"  value="1.0"/>
+      <param name="front_points_min" value="10"/>
+      <param name="yaw_deadband"     value="0.01"/>
+      <param name="rate"             value="10.0"/>
+
+      <!-- caminho para o modelo treinado -->
+      <param name="model_path" value="$(find xasv_sim)/data/xasv_huitl_policy/trained_rc_policy.pt"/>
+
+      <!-- liga/desliga o override -->
+      <param name="control_enabled" value="true"/>
+
+      <!-- importante pra RC_OVERRIDE funcionar -->
+      <param name="set_sysid_mygcs" value="true"/>
+      <param name="sysid_mygcs_value" value="1"/> 
+
+      <param name="thr_scale" value="0.5"/>      <!-- reduz impacto no throttle -->
+      <param name="yaw_scale" value="1.5"/>      <!-- aumenta impacto no yaw -->
+      <param name="allow_reverse" value="false"/> <!-- não deixa thr < 0 -->
+
+    </node>
+
+</launch>
+

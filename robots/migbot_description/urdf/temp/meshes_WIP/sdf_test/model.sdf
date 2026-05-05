@@ -1,0 +1,144 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="rover_argo_N1">
+    <static>false</static>
+    <link name="helice1">
+      <pose>0.0 0.0 0.0 0.0 -0.0 0.0</pose>
+      <visual name="helice1_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="helice3">
+      <pose>-0.7150071859359741 -0.6524609327316284 0.6604171991348267 0.0 -0.0 -1.570796251296997</pose>
+      <visual name="helice3_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="helice2">
+      <pose>0.6400066614151001 -0.6524609327316284 0.6604171991348267 0.0 -0.0 -1.570796251296997</pose>
+      <visual name="helice2_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="helice4">
+      <pose>0.6400066614151001 0.6475362777709961 0.6604171991348267 0.0 -0.0 1.5707963705062866</pose>
+      <visual name="helice4_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="helice6">
+      <pose>1.0117169618606567 0.6475362777709961 0.6604171991348267 0.0 -0.0 -1.570796251296997</pose>
+      <visual name="helice6_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <link name="helice5">
+      <pose>1.0117169618606567 -0.6527122259140015 0.6604171991348267 0.0 -0.0 -1.570796251296997</pose>
+      <visual name="helice5_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://rover_argo_N1/meshes/helice.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name="helice1_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice1</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="helice2_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice2</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="helice3_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice3</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="helice4_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice4</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="helice5_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice5</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+    <joint name="helice6_joint" type="revolute">
+      <parent>base_link</parent>
+      <child>helice6</child>
+      <pose>0 0 0 0 0 0</pose>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <dynamics>
+          <damping>0.1</damping>
+          <friction>0.2</friction>
+        </dynamics>
+      </axis>
+    </joint>
+  </model>
+</sdf>

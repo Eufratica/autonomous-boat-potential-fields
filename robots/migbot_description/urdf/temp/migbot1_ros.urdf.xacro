@@ -1,0 +1,418 @@
+<?xml version="1.0" ?>
+<robot name="migbot1" xmlns:xacro="http://ros.org/wiki/xacro">
+  <joint name="Engine_helice_1" type="revolute">
+    <parent link="base_link"/>
+    <child link="Helice_1"/>
+    <origin xyz="0.65  -0.65   0.662" rpy="0      1.57075 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0"/> <!-- TO ADJUST-->
+  </joint>
+  <joint name="Engine_helice_2" type="revolute">
+    <parent link="base_link"/>
+    <child link="Helice_2"/>
+    <origin xyz="-0.75   0.65   0.662" rpy="0      1.57075 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0"/> <!-- TO ADJUST-->
+  </joint>
+  <joint name="Engine_helice_3" type="revolute">
+    <parent link="base_link"/>
+    <child link="Helice_3"/>
+    <origin xyz="0.65  0.65  0.662" rpy="0      1.57075 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0"/> <!-- TO ADJUST-->
+  </joint>
+  <joint name="Engine_helice_4" type="revolute">
+    <parent link="base_link"/>
+    <child link="Helice_4"/>
+    <origin xyz="-0.75  -0.65   0.662" rpy="0      1.57075 0"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100.0" lower="-1.79769e+308" upper="1.79769e+308" velocity="100.0"/> <!-- TO ADJUST-->
+  </joint>
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+  </joint>
+  <joint name="mag_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="mag_link"/>
+    <origin xyz="0.1 0.1 0.1" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+  </joint>  
+ 
+ <!--  <joint name="dummy_joint" type="fixed">
+     <parent link="dummy"/>
+     <child link="base_link"/>
+  </joint>
+     <link name="dummy">
+  </link> -->
+  
+  <link name="base_link">
+    <inertial>
+      <mass value="92.67"/>
+      <origin xyz="-0.05   0    0.35" rpy="0 0 0"/>
+       <!--<inertia ixx="31.537" ixy="0.15015" ixz="0.155408" iyy="41.0975" iyz="0.82132" izz="21.8282"/>-->
+       <inertia ixx="20.345065332" ixy="0.014862393" ixz="0.721617432" iyx="0.014862393" iyy="30.092381288" iyz="0.005232506" izx="0.721617432" izy="0.005232506" izz="41.090476702"/>      
+    </inertial>
+    <collision name="base_link_colision_collision">
+      <origin xyz="0 0 0.4" rpy="0   0   3.14"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/base_link.dae" scale="1 1 1"/>
+      </geometry>
+    </collision>
+    <visual name="base_link_visual">
+      <origin xyz="0 0 0.4" rpy="0   0   3.14"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/base_link.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Helice_1">
+    <inertial>
+      <mass value="0.024"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.674257 -0.635722 0.707819" rpy="1.6e-05 1.57075 1.6e-05"/>
+    </inertial>
+    <collision name="Helice_1_colision_collision">
+      <origin xyz="0 0 0" rpy="1.57079e+00 0 0"/>
+      <geometry>
+        <cylinder radius="0.19" length="0.003"/>
+      </geometry>
+    </collision>
+    <visual name="Helice_1_visual">
+      <origin xyz="0.674257 -0.635722 0.707819" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/helice.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Helice_2">
+    <inertial>
+      <mass value="0.024"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1.5098e-06" ixy="0" ixz="-2.43351e-06" iyy="0.000230697" iyz="0" izz="0.000229375"/>
+    </inertial>
+    <collision name="Helice_2_colision_collision">
+      <origin xyz="-0.683793 0.668149 0.705466" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <cylinder radius="0.19" length="0.003"/>
+      </geometry>
+    </collision>
+    <visual name="Helice_2_visual">
+      <origin xyz="-0.683793 0.668149 0.705466" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/helice.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Helice_3">
+    <inertial>
+      <mass value="0.024"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1.5098e-06" ixy="0" ixz="-2.43351e-06" iyy="0.000230697" iyz="0" izz="0.000229375"/>
+    </inertial>
+    <collision name="Helice_3_colision_collision">
+      <origin xyz="0.662542 0.6656 0.704305" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <cylinder radius="0.19" length="0.003"/>
+      </geometry>
+    </collision>
+    <visual name="Helice_3_visual">
+      <origin xyz="0.662542 0.6656 0.704305" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/helice.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="Helice_4">
+    <inertial>
+      <mass value="0.024"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1.5098e-06" ixy="0" ixz="-2.43351e-06" iyy="0.000230697" iyz="0" izz="0.000229375"/>
+    </inertial>
+    <collision name="Helice_4_colision_collision">
+      <origin xyz="-0.680195 -0.637026 0.702505" rpy="1.6e-05 1.57075 1.6e-05"/>
+      <geometry>
+        <cylinder radius="0.19" length="0.003"/>
+      </geometry>
+    </collision>
+    <visual name="Helice_4_visual">
+      <origin xyz="0 0 0" rpy="1.57079e+00 0 0"/>
+      <geometry>
+        <mesh filename="package://migbot_description/urdf/meshes/helice.dae" scale="1 1 1"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="gps_link">
+    <inertial>
+      <mass value="0.015"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+    <visual name="visual">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.01" length="0.002"/>
+      </geometry>
+    </visual>
+  </link>
+  
+  <link name="imu_link">
+    <inertial>
+      <mass value="0.015"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+  </link>
+  
+  <link name="mag_link">
+    <inertial>
+      <mass value="0.015"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05"/>
+    </inertial>
+  </link>
+  
+  
+    <transmission name="Engine_helice_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="Engine_helice_1_act">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Engine_helice_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+    <transmission name="Engine_helice_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="Engine_helice_2_act">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Engine_helice_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+    <transmission name="Engine_helice_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="Engine_helice_3_act">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Engine_helice_3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+    <transmission name="Engine_helice_4_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="Engine_helice_4_act">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="Engine_helice_4">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>   
+  
+  <!--PLUGINS-->
+
+
+  <gazebo reference="imu_link">
+      <plugin name='gazebo_imu_plugin' filename='libgazebo_imu_plugin.so'>
+      <robotNamespace/>
+      <linkName>imu_link</linkName> 
+      <imuTopic>/imu</imuTopic>
+      <gyroscopeNoiseDensity>0.0003394</gyroscopeNoiseDensity>
+      <gyroscopeRandomWalk>3.8785e-05</gyroscopeRandomWalk>
+      <gyroscopeBiasCorrelationTime>1000.0</gyroscopeBiasCorrelationTime>
+      <gyroscopeTurnOnBiasSigma>0.0087</gyroscopeTurnOnBiasSigma>
+      <accelerometerNoiseDensity>0.004</accelerometerNoiseDensity>
+      <accelerometerRandomWalk>0.006</accelerometerRandomWalk>
+      <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
+      <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
+    </plugin>
+  </gazebo>
+    
+   <gazebo reference="mag_link">
+    <plugin name='magnetometer_plugin' filename='libgazebo_magnetometer_plugin.so'>
+      <robotNamespace/>
+      <linkName>mag_link</linkName>
+      <magTopic>/mag</magTopic>
+      <pubRate>100</pubRate>
+      <noiseDensity>0.0004</noiseDensity>
+      <randomWalk>6.4e-06</randomWalk>
+      <biasCorrelationTime>600</biasCorrelationTime>
+    </plugin>
+  </gazebo>
+
+ 
+ 
+ 
+ <!-- TO ADJUST -->
+   <gazebo>
+    <plugin name='motor1_model' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>Engine_helice_1</jointName>
+      <linkName>Helice_1</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1100</maxRotVelocity>
+      <!--<motorConstant>10e-04</motorConstant>
+      <momentConstant>0.0001</momentConstant>-->
+      <motorConstant>5e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>0</motorNumber>
+      <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/0</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+    </plugin>
+  </gazebo>
+
+   <gazebo>
+    <plugin name='motor2_model' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>Engine_helice_2</jointName>
+      <linkName>Helice_2</linkName>
+      <turningDirection>ccw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1100</maxRotVelocity>
+      <motorConstant>5e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>1</motorNumber>
+      <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/1</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+    </plugin>
+  </gazebo>
+
+ 
+   <gazebo>
+    <plugin name='motor3_model' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>Engine_helice_3</jointName>
+      <linkName>Helice_3</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1100</maxRotVelocity>
+      <motorConstant>5e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>2</motorNumber>
+      <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/2</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+    </plugin>
+  </gazebo>
+
+
+   <gazebo>
+    <plugin name='motor4_model' filename='libgazebo_motor_model.so'>
+      <robotNamespace></robotNamespace>
+      <jointName>Engine_helice_4</jointName>
+      <linkName>Helice_4</linkName>
+      <turningDirection>cw</turningDirection>
+      <timeConstantUp>0.0125</timeConstantUp>
+      <timeConstantDown>0.025</timeConstantDown>
+      <maxRotVelocity>1100</maxRotVelocity>
+      <motorConstant>5e-03</motorConstant>
+      <momentConstant>0.01</momentConstant>
+      <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+      <motorNumber>4</motorNumber>
+      <rotorDragCoefficient>0.000806428</rotorDragCoefficient>
+      <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+      <motorSpeedPubTopic>/motor_speed/3</motorSpeedPubTopic>
+      <rotorVelocitySlowdownSim>1</rotorVelocitySlowdownSim>
+    </plugin>
+  </gazebo> 
+  
+ 
+    <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>$(arg namespace)</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>    
+
+  <gazebo>
+    <plugin name='usv_dynamics_wamv_dynamics_plugin' filename='libgazebo_usv_dynamics_plugin.so'>
+      <bodyName>base_link</bodyName>
+      <waterLevel>-0.01</waterLevel>
+      <waterDensity>997.8</waterDensity>
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+      <xU>51.3</xU>
+      <xUU>72.4</xUU>
+      <yV>40.0</yV>
+      <yVV>0.0</yVV>
+      <zW>500.0</zW>
+      <kP>50.0</kP>
+      <mQ>50.0</mQ>
+      <nR>400.0</nR>
+      <nRR>0.0</nRR>
+      <hullRadius>0.8</hullRadius>
+      <boatWidth>1.6</boatWidth>
+      <boatLength>2.3</boatLength>
+      <length_n>2</length_n>
+      <wave_model>ocean_waves</wave_model>      
+    </plugin>
+  </gazebo>
+    
+  <gazebo reference="base_link">
+    <plugin name="MigbotBuoyancyPlugin" filename="libbuoyancy_gazebo_plugin.so">
+      <wave_model>ocean_waves</wave_model>
+      <fluid_density>997.8</fluid_density>
+      <fluid_level>-0.01</fluid_level>
+      <linear_drag>5.0</linear_drag>
+      <angular_drag>5.0</angular_drag>
+      <buoyancy name="buoyancy_sphere">
+        <link_name>base_link</link_name>
+        <pose>0 0 0.1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.4 0.2</size>
+          </box>
+        </geometry>
+      </buoyancy>
+    </plugin> 
+  </gazebo>
+
+    
+  <gazebo>
+    <plugin name="MigbotFollowPlugin" filename="libfollow_plugin.so"> <!--TO SIMULATE WATER CURRENT -->
+      <link_name>base_link</link_name> <!--PROBLEM WITH "_" -->
+      <loop_forever>true</loop_forever>
+      <line>
+       <direction>3.14</direction>
+       <length>1</length>
+<!-- TO DO: CHANGES THE FOLLOW PLUGIN TO GENERALIZATION OF WATER CURRENT DIRECTION -->              
+       <force>-2</force>
+       <torque>-1</torque>
+   </line>
+    </plugin>
+  </gazebo>  
+  
+  
+  
+  
+  
+</robot>

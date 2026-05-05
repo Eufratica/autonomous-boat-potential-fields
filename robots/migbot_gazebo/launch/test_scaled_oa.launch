@@ -1,0 +1,51 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find migbot_gazebo)/worlds/test_scaled_oa2.world"/>
+    <arg name="verbose" value="true"/>
+    <arg name="paused" value="false"/> 
+    <arg name="gui" value="true"/>           
+    <!-- more default parameters can be changed here -->
+  </include>
+  
+  
+    <!-- Start in a default namespace -->
+  <arg name="namespace" default="/"/>
+
+  <!-- Initial USV location and attitude-->
+  <arg name="x" default="0" />
+  <arg name="y" default="0" />
+  <arg name="z" default="0" />
+  <arg name="P" default="0" />
+  <arg name="R" default="0" />
+  <arg name="Y" default="0" />
+  <arg name="camera_enabled" default="false" />
+  <arg name="ground_truth_enabled" default="false" />  
+  <arg name="livox_enabled" default="true" />
+  <arg name="ping360_enabled" default="true" />    
+  <arg name="imaging" default="false" />
+  
+  <!-- Load robot model -->
+  <arg name="urdf" default="$(find migbot_gazebo)/urdf/migbot_gazebo_ardupilot_scaled.urdf.xacro"/>
+  <param name="$(arg namespace)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf)'
+         namespace:=$(arg namespace) imaging:=$(arg imaging) livox_enabled:=$(arg livox_enabled) ping360_enabled:=$(arg ping360_enabled)
+         camera_enabled:=$(arg camera_enabled) ground_truth_enabled:=$(arg ground_truth_enabled)"/>
+
+  <!-- Spawn model in Gazebo -->
+    <node name="spawn_model" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x)
+              -y $(arg y)
+              -z $(arg z)
+              -Y $(arg Y)
+              -unpause
+              -urdf
+              -param robot_description
+              -model migbot1_scaled
+              -robot_namespace $(arg namespace)" />
+              
+              
+      <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" /> 
+ 
+  
+</launch>

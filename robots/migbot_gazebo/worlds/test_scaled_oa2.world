@@ -1,0 +1,3303 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ocean_waves'>
+      <static>1</static>
+      <plugin name='ocean_waves::wavefield_entity' filename='libWavefieldModelPlugin.so'>
+        <static>0</static>
+        <update_rate>30</update_rate>
+        <size>1000 1000</size>
+        <cell_count>50 50</cell_count>
+        <wave>
+          <model>PMS</model>
+          <period>50</period>
+          <number>3</number>
+          <scale>2.5</scale>
+          <gain>0.0001</gain>
+          <angle>3.14</angle>
+          <tau>2.0</tau>
+          <amplitude>0.0</amplitude>
+          <steepness>0.0</steepness>
+        </wave>
+      </plugin>
+      <link name='ocean_waves_link'>
+        <visual name='ocean_waves_visual'>
+          <plugin name='ocean_waves_visual_plugin' filename='libWavefieldVisualPlugin.so'>
+            <enableRtt>1</enableRtt>
+            <rttNoise>0.1</rttNoise>
+            <refractOpacity>0.2</refractOpacity>
+            <reflectOpacity>0.2</reflectOpacity>
+            <wave>
+              <model>PMS</model>
+              <period>50</period>
+              <number>3</number>
+              <scale>2.5</scale>
+              <gain>0.0001</gain>
+              <angle>3.14</angle>
+              <tau>2.0</tau>
+              <amplitude>0.0</amplitude>
+              <steepness>0.0</steepness>
+            </wave>
+          </plugin>
+          <geometry>
+            <mesh>
+              <scale>2.5 2.5 1</scale>
+              <uri>model://ocean_waves/meshes/mesh.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://ocean_waves/materials/scripts/waves.material</uri>
+              <name>WaveSim/GerstnerWaves</name>
+            </script>
+          </material>
+          <laser_retro>-1</laser_retro>
+        </visual>
+        <visual name='ocean_waves_below_visual'>
+          <pose>0 0 -0.05 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>2.5 2.5 1</scale>
+              <uri>model://ocean_waves/meshes/mesh_below.dae</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://ocean_waves/materials/scripts/waves.material</uri>
+              <name>WaveSim/GerstnerWaves</name>
+            </script>
+          </material>
+          <laser_retro>-1</laser_retro>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0 0 0 -0 -2.28319</pose>
+    </model>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>0 0 -0.1 0 -0 0</pose>
+    </model>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>-21.7784</latitude_deg>
+      <longitude_deg>-43.3697</longitude_deg>
+      <elevation>90</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='buoy_1'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>10 10 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_2'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>74 15 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_3'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>138 10 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_4'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>202 15 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_5'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>266 10 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_6'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>36 15 0 0 0 -3</pose>
+    </model>
+    <model name='buoy_7'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>80 10 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_8'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>120 15 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_9'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>160 10 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_10'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>200 15 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_11'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>10 25 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_12'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>74 30 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_13'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>138 25 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_14'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>202 30 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_15'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>266 25 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_15n'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>40 30 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_16'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>15 6 0 0 0 -3</pose>
+    </model>
+    <model name='buoy_17'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>80 25 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_18'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>120 30 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_19'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>160 25 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_20'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>200 30 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_21'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>10 50 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_22'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>74 45 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_23'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>138 50 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_24'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>202 45 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_25'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 -1 0 -0 0</pose>
+          <mass>20</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>0.1</izz>
+          </inertia>
+        </inertial>
+        <collision name='upright'>
+          <geometry>
+            <cylinder>
+              <radius>1.5</radius>
+              <length>0.5</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://branche1_buoy/meshes/branche1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkBuoyancyPlugin' filename='libbuoyancy_gazebo_plugin.so'>
+        <wave_model>ocean_waves</wave_model>
+        <fluid_density>1000</fluid_density>
+        <fluid_level>0.0</fluid_level>
+        <linear_drag>25.0</linear_drag>
+        <angular_drag>2.0</angular_drag>
+        <buoyancy name='buoyancy_sphere'>
+          <link_name>link</link_name>
+          <pose>0 0 0.2 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.325</radius>
+            </sphere>
+          </geometry>
+        </buoyancy>
+      </plugin>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>-1</length>
+          <force>100</force>
+          <torque>1</torque>
+        </line>
+      </plugin>
+      <pose>266 50 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_26'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>40 45 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_27'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>80 50 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_28'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>120 45 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_29'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>160 50 0 0 -0 0</pose>
+    </model>
+    <model name='buoy_30'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>200 45 0 0 -0 0</pose>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <model name='buoy_26_clone'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>20.4167 41.0716 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_0'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>23.3501 58.1141 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_1'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>64.3815 61.049 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_2'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>132.674 61.7344 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_3'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>45.0543 12.7054 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_4'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>19.2125 13.6241 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <model name='buoy_26_clone_5'>
+      <link name='link'>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>200</mass>
+          <inertia>
+            <ixx>10</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>10</iyy>
+            <iyz>0</iyz>
+            <izz>100</izz>
+          </inertia>
+        </inertial>
+        <collision name='trunk_collision'>
+          <pose>0 0 0 1.57 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>1</radius>
+              <length>7</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='trunk_visual'>
+          <geometry>
+            <mesh>
+              <uri>model://trunk2_buoy/meshes/trunk2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='TrunkFollowPlugin' filename='libfollow_plugin.so'>
+        <link_name>link</link_name>
+        <loop_forever>1</loop_forever>
+        <line>
+          <direction>0</direction>
+          <length>10</length>
+          <force>1</force>
+          <torque>-10</torque>
+        </line>
+      </plugin>
+      <pose>56.325 29.7162 0.899995 0.0008 1.10066 -0.002408</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>1011 749000000</sim_time>
+      <real_time>1112 776424487</real_time>
+      <wall_time>1712709120 464977486</wall_time>
+      <iterations>685499</iterations>
+      <model name='House 1'>
+        <pose>19.3069 0.21115 -7.87723 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>19.3069 0.21115 -7.87723 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='House 1_0'>
+        <pose>27.3041 25.9024 -7.80488 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>27.3041 25.9024 -7.80488 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='House 1_1'>
+        <pose>56.752 21.963 -7.77145 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>56.752 21.963 -7.77145 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='House 1_2'>
+        <pose>86.4974 37.101 -7.8 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>86.4974 37.101 -7.8 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='House 1_3'>
+        <pose>105.439 59.56 -7.82496 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>105.439 59.56 -7.82496 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_1'>
+        <pose>95.4919 -5.23313 0.15 -0 -2e-06 -1.42222</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>95.4919 -5.23313 0.15 -0 -2e-06 -1.42222</pose>
+          <velocity>0.000466 -0.003017 0.007122 0.001125 0.001857 0.000108</velocity>
+          <acceleration>-9.86509 14.8639 28.2033 1.35972 -0.124604 0.538548</acceleration>
+          <wrench>-197.302 297.277 564.066 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_10'>
+        <pose>195.116 16.3606 0.899996 0.000792 1.28605 -0.02808</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>195.116 16.3606 0.899996 0.000792 1.28605 -0.02808</pose>
+          <velocity>0.005781 -0.00111 -0.004293 -0.001023 0.007464 0.000481</velocity>
+          <acceleration>-0.069915 0.491894 -9.31287 1.73226 1.41856 1.69685</acceleration>
+          <wrench>-13.983 98.3788 -1862.57 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_11'>
+        <pose>25.0773 24.3759 0.149996 3e-06 6.4e-05 -0.047709</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>25.0773 24.3759 0.149996 3e-06 6.4e-05 -0.047709</pose>
+          <velocity>0.175089 -0.004457 -0.004714 0.002907 0.074165 -0.017525</velocity>
+          <acceleration>4.99432 -0.238366 -9.79995 -1.51742 -0.644579 2.56727</acceleration>
+          <wrench>99.8863 -4.76733 -195.999 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_12'>
+        <pose>75.6717 72.5575 0.150001 1e-06 -1.8e-05 1.54872</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>75.6717 72.5575 0.150001 1e-06 -1.8e-05 1.54872</pose>
+          <velocity>0.001029 0.047174 0.00664 0.014323 0.003639 -0.003418</velocity>
+          <acceleration>0.013101 -4.84595 17.2207 0.638797 -1.49079 -1.10301</acceleration>
+          <wrench>0.262017 -96.919 344.413 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_13'>
+        <pose>165.791 23.6371 0.149993 -2e-06 -2e-06 -0.171867</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>165.791 23.6371 0.149993 -2e-06 -2e-06 -0.171867</pose>
+          <velocity>-0.004774 0.009578 -0.016901 -0.017567 -0.019486 -0.00145</velocity>
+          <acceleration>0.938567 -3.78494 -2.09968 0.19069 0.490078 -2.91184</acceleration>
+          <wrench>18.7713 -75.6988 -41.9936 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_14'>
+        <pose>179.683 7.43564 0.150001 1e-06 3e-06 -3.08691</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>179.683 7.43564 0.150001 1e-06 3e-06 -3.08691</pose>
+          <velocity>-0.028574 0.000393 0.006621 -0.001432 0.011415 0.003086</velocity>
+          <acceleration>2.17696 -0.804149 13.4351 -2.60443 -1.19423 1.54741</acceleration>
+          <wrench>43.5391 -16.083 268.703 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_15'>
+        <pose>265.11 20.6958 0.150003 1e-05 7e-06 -0.751825</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>265.11 20.6958 0.150003 1e-05 7e-06 -0.751825</pose>
+          <velocity>-0.012564 -0.005955 0.002322 0.006023 -0.009609 0.01018</velocity>
+          <acceleration>1.74659 -1.97724 -8.15107 0.530411 -0.807693 0.465784</acceleration>
+          <wrench>34.9317 -39.5449 -163.021 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_15n'>
+        <pose>41.1105 -652.318 0.148205 0.001201 0.000186 -1.63342</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>41.1105 -652.318 0.148205 0.001201 0.000186 -1.63342</pose>
+          <velocity>-0.137943 -1.18988 -0.16179 0.203501 -0.138454 0.759841</velocity>
+          <acceleration>1.05418 0.004936 -0.052643 -1.65978 -1.05794 -1.79013</acceleration>
+          <wrench>21.0837 0.098717 -1.05286 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_16'>
+        <pose>119.286 -3.05046 0.899994 0.0008 1.27129 3.10125</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>119.286 -3.05046 0.899994 0.0008 1.27129 3.10125</pose>
+          <velocity>0.029894 -0.000188 -0.006098 9.4e-05 0.03017 4.3e-05</velocity>
+          <acceleration>-0.001474 5.9e-05 -9.80478 -0.095646 0.003935 0.028927</acceleration>
+          <wrench>-0.294784 0.0119 -1960.96 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_17'>
+        <pose>80.6425 25.0316 0.9 0.000796 1.51534 0.001683</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>80.6425 25.0316 0.9 0.000796 1.51534 0.001683</pose>
+          <velocity>-0.009073 -1.5e-05 0 1.5e-05 -0.009075 0</velocity>
+          <acceleration>0.000226 0 0 0.092345 0.000307 -0.04475</acceleration>
+          <wrench>0.045196 7.5e-05 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_18'>
+        <pose>120.657 29.1938 0.899995 0.000811 1.46666 -0.026966</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>120.657 29.1938 0.899995 0.000811 1.46666 -0.026966</pose>
+          <velocity>-0.000376 -0.001416 -0.00481 0.001516 -0.000441 1.3e-05</velocity>
+          <acceleration>0.00052 -1.4e-05 -9.80497 0.099421 -0.002759 0.010384</acceleration>
+          <wrench>0.103915 -0.002804 -1960.99 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_19'>
+        <pose>167.777 27.5077 0.899997 -3.14079 -0.569386 -3.04263</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>167.777 27.5077 0.899997 -3.14079 -0.569386 -3.04263</pose>
+          <velocity>0.022178 0.007312 0.00263 -0.007247 0.022338 2.1e-05</velocity>
+          <acceleration>0.282778 0.511319 9.2811 -0.66766 -1.05534 -3.05881</acceleration>
+          <wrench>56.5556 102.264 1856.22 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_2'>
+        <pose>72.1884 -647.123 0.148205 0.001201 0.000186 -1.63342</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>72.1884 -647.123 0.148205 0.001201 0.000186 -1.63342</pose>
+          <velocity>-0.137943 -1.18988 -0.16179 0.203501 -0.138454 0.759841</velocity>
+          <acceleration>1.05418 0.004936 -0.052643 -1.65978 -1.05794 -1.79013</acceleration>
+          <wrench>21.0837 0.098717 -1.05286 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_20'>
+        <pose>175.813 33.7816 0.9 -3.1408 1.1278 3.09752</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>175.813 33.7816 0.9 -3.1408 1.1278 3.09752</pose>
+          <velocity>-0.005127 0.001485 0.004141 -0.001477 -0.005287 6e-06</velocity>
+          <acceleration>-0.106909 0.075039 8.30135 0.300242 0.869301 2.86896</acceleration>
+          <wrench>-21.3818 15.0078 1660.27 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_21'>
+        <pose>11.5384 14.5118 0.150008 -7e-06 9e-06 -1.42152</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>11.5384 14.5118 0.150008 -7e-06 9e-06 -1.42152</pose>
+          <velocity>-0.006353 0.00269 -0.004406 -0.010991 -0.009339 0.001628</velocity>
+          <acceleration>3.62677 -1.53154 -1.70907 2.22557 -0.929301 -1.04785</acceleration>
+          <wrench>72.5355 -30.6307 -34.1813 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_22'>
+        <pose>133.95 41.6191 0.15 -0 -1e-06 -0.154014</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>133.95 41.6191 0.15 -0 -1e-06 -0.154014</pose>
+          <velocity>0.004593 -0.000466 0.006991 0.00186 0.000574 -0.000378</velocity>
+          <acceleration>-10.9031 8.64114 24.1747 0.70441 1.472 1.30311</acceleration>
+          <wrench>-218.063 172.823 483.495 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_23'>
+        <pose>154.913 61.5932 0.150008 1e-06 1e-05 0.897026</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>154.913 61.5932 0.150008 1e-06 1e-05 0.897026</pose>
+          <velocity>-0.003141 0.012146 -0.007117 0.012525 -0.011598 -0.004239</velocity>
+          <acceleration>2.85554 0.077403 -2.04267 1.29606 -1.51872 0.486564</acceleration>
+          <wrench>57.1107 1.54807 -40.8534 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_24'>
+        <pose>172.029 41.2121 0.149996 -4e-06 9.5e-05 -3.0869</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>172.029 41.2121 0.149996 -4e-06 9.5e-05 -3.0869</pose>
+          <velocity>-0.127542 -0.006697 -0.00476 0.009407 -0.089135 -0.007508</velocity>
+          <acceleration>-4.99252 -0.273363 -9.80003 -0.814441 0.680665 2.57052</acceleration>
+          <wrench>-99.8504 -5.46726 -196.001 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_25'>
+        <pose>638.715 -288.352 0.147627 -0.000799 -0.000788 -1.52728</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>638.715 -288.352 0.147627 -0.000799 -0.000788 -1.52728</pose>
+          <velocity>0.708306 -0.460752 -0.166121 -0.014402 0.171857 -0.538806</velocity>
+          <acceleration>-2.86054 -3.17734 0.620681 -1.75384 -0.609224 -0.197855</acceleration>
+          <wrench>-57.2108 -63.5467 12.4136 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26'>
+        <pose>40.5065 44.825 0.9 0.000796 1.38703 -0.014085</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>40.5065 44.825 0.9 0.000796 1.38703 -0.014085</pose>
+          <velocity>-0.000722 -0.001326 0.004666 0.001326 -0.000758 2e-06</velocity>
+          <acceleration>0.050974 -0.539075 9.33196 0.991713 -1.14807 2.43346</acceleration>
+          <wrench>10.1948 -107.815 1866.39 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone'>
+        <pose>17.5675 37.5788 0.899995 0.000788 1.40168 -0.010189</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>17.5675 37.5788 0.899995 0.000788 1.40168 -0.010189</pose>
+          <velocity>0.003212 -0.000834 -0.004636 -0.001284 0.004313 0.000315</velocity>
+          <acceleration>-0.047261 0.528081 -9.27684 -0.678541 1.05572 -2.96499</acceleration>
+          <wrench>-9.45211 105.616 -1855.37 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_0'>
+        <pose>23.6416 57.7023 0.899995 0.000788 1.40332 -0.007905</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>23.6416 57.7023 0.899995 0.000788 1.40332 -0.007905</pose>
+          <velocity>0.002988 -0.000823 -0.00464 -0.001297 0.004079 0.000312</velocity>
+          <acceleration>-0.047981 0.528525 -9.2764 -0.672067 1.04429 -2.9903</acceleration>
+          <wrench>-9.59627 105.705 -1855.28 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_1'>
+        <pose>64.6758 60.6202 0.899995 0.000788 1.40075 -0.005571</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>64.6758 60.6202 0.899995 0.000788 1.40075 -0.005571</pose>
+          <velocity>0.002262 -0.000813 -0.004641 -0.00131 0.003369 0.000316</velocity>
+          <acceleration>-0.049958 0.527963 -9.27696 -0.689742 1.0579 -2.94258</acceleration>
+          <wrench>-9.99158 105.593 -1855.39 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_2'>
+        <pose>132.967 61.3059 0.899995 0.000789 1.39931 -0.005675</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>132.967 61.3059 0.899995 0.000789 1.39931 -0.005675</pose>
+          <velocity>0.001847 -0.000811 -0.004642 -0.001313 0.002963 0.000319</velocity>
+          <acceleration>-0.050325 0.527615 -9.27731 -0.698039 1.06658 -2.91755</acceleration>
+          <wrench>-10.065 105.523 -1855.46 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_3'>
+        <pose>45.342 12.2953 0.9 0.000796 1.39843 -0.008085</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>45.342 12.2953 0.9 0.000796 1.39843 -0.008085</pose>
+          <velocity>0.001724 -0.001341 0.004634 0.001341 0.001705 1e-06</velocity>
+          <acceleration>0.050885 -0.524872 9.26884 0.923984 -1.07394 2.63661</acceleration>
+          <wrench>10.1771 -104.974 1853.77 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_4'>
+        <pose>20.331 13.4011 0.899995 0.000789 1.39669 -0.01003</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>20.331 13.4011 0.899995 0.000789 1.39669 -0.01003</pose>
+          <velocity>0.000889 -0.000809 -0.004648 -0.001311 0.002021 0.000323</velocity>
+          <acceleration>-0.048801 0.526884 -9.27803 -0.707722 1.08534 -2.87834</acceleration>
+          <wrench>-9.76026 105.377 -1855.61 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_26_clone_5'>
+        <pose>45.1791 28.2041 0.899995 0.000789 1.38359 -0.016707</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>45.1791 28.2041 0.899995 0.000789 1.38359 -0.016707</pose>
+          <velocity>-0.000626 -0.000786 -0.004676 -0.00133 0.000581 0.000345</velocity>
+          <acceleration>-0.049108 0.523359 -9.28154 -0.776843 1.168 -2.66936</acceleration>
+          <wrench>-9.8216 104.672 -1856.31 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_27'>
+        <pose>79.7641 49.9233 0.899994 0.000799 0.774689 -0.033767</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>79.7641 49.9233 0.899994 0.000799 0.774689 -0.033767</pose>
+          <velocity>-5e-05 0.002981 -0.004975 0.004084 0.006078 -0.001752</velocity>
+          <acceleration>-0.338409 -0.628281 -9.17534 0.385404 -0.284363 -0.939217</acceleration>
+          <wrench>-67.6818 -125.656 -1835.07 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_28'>
+        <pose>82.0127 50.486 0.899992 -3.1408 -0.64207 3.04193</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>82.0127 50.486 0.899992 -3.1408 -0.64207 3.04193</pose>
+          <velocity>0.001209 0.003722 -0.006038 0.005376 0.007758 -0.001881</velocity>
+          <acceleration>-0.445729 -0.620145 -9.17646 2.21532 -0.188725 0.702562</acceleration>
+          <wrench>-89.1459 -124.029 -1835.29 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_29'>
+        <pose>160.507 49.825 0.9 0.000796 1.38703 -0.014085</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>160.507 49.825 0.9 0.000796 1.38703 -0.014085</pose>
+          <velocity>-0.000722 -0.001326 0.004666 0.001326 -0.000758 2e-06</velocity>
+          <acceleration>0.050974 -0.539075 9.33196 0.991713 -1.14807 2.43346</acceleration>
+          <wrench>10.1948 -107.815 1866.39 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_3'>
+        <pose>140.111 30.8969 0.150003 2e-06 4e-06 1.46396</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>140.111 30.8969 0.150003 2e-06 4e-06 1.46396</pose>
+          <velocity>-0.008139 0.010188 -0.007954 0.012595 -0.01261 -0.005574</velocity>
+          <acceleration>2.09184 0.275083 -3.49437 1.7099 -1.22106 2.12943</acceleration>
+          <wrench>41.8368 5.50166 -69.8875 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_30'>
+        <pose>165.355 50.5285 0.899995 -3.1408 1.13839 3.10855</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>165.355 50.5285 0.899995 -3.1408 1.13839 3.10855</pose>
+          <velocity>-0.016676 0.001388 -0.005247 0.000907 -0.01902 0.00067</velocity>
+          <acceleration>0.089148 -0.399398 -9.40507 -0.001498 -0.963618 -2.5717</acceleration>
+          <wrench>17.8296 -79.8796 -1881.01 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_4'>
+        <pose>171.294 10.3704 0.15 0 2e-06 -3.08693</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>171.294 10.3704 0.15 0 2e-06 -3.08693</pose>
+          <velocity>-0.03231 0.000601 0.005314 -0.002246 0.013486 0.003504</velocity>
+          <acceleration>2.36456 -1.47128 14.6352 1.58154 -1.02278 -0.547151</acceleration>
+          <wrench>47.2913 -29.4256 292.704 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_5'>
+        <pose>267.555 18.9562 0.15 3e-06 -3e-06 2.35429</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>267.555 18.9562 0.15 3e-06 -3e-06 2.35429</pose>
+          <velocity>0.002055 -0.000349 0.003982 0.001633 0.002909 0.00053</velocity>
+          <acceleration>-6.41719 0.817533 -5.18047 1.16588 1.17529 0.691567</acceleration>
+          <wrench>-128.344 16.3507 -103.609 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_6'>
+        <pose>-3607.6 41.4427 0.868427 0.01068 -0.412438 3.13991</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>-3607.6 41.4427 0.868427 0.01068 -0.412438 3.13991</pose>
+          <velocity>-9.70731 0.143879 -0.659733 2.94227 -0.28375 -3.06234</velocity>
+          <acceleration>-0.046957 9.97029 0.172308 1.02365 1.17337 -1.1774</acceleration>
+          <wrench>-9.39142 1994.06 34.4616 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_7'>
+        <pose>87.005 12.4522 0.9 0.000796 1.55686 0.077884</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>87.005 12.4522 0.9 0.000796 1.55686 0.077884</pose>
+          <velocity>-0.000919 0.00128 0.004645 -0.001277 -0.000819 -5e-06</velocity>
+          <acceleration>-0.036988 0.515052 9.28995 -0.182772 -0.099017 0.987301</acceleration>
+          <wrench>-7.39763 103.01 1857.99 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_8'>
+        <pose>120.507 14.825 0.9 0.000796 1.38704 -0.014087</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>120.507 14.825 0.9 0.000796 1.38704 -0.014087</pose>
+          <velocity>-0.000721 -0.001326 0.004666 0.001326 -0.000757 2e-06</velocity>
+          <acceleration>0.050971 -0.539078 9.33197 0.991673 -1.14804 2.43356</acceleration>
+          <wrench>10.1942 -107.816 1866.39 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='buoy_9'>
+        <pose>160.507 9.82499 0.9 0.000796 1.38703 -0.014085</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>160.507 9.82499 0.9 0.000796 1.38703 -0.014085</pose>
+          <velocity>-0.000722 -0.001326 0.004666 0.001326 -0.000758 2e-06</velocity>
+          <acceleration>0.050974 -0.539075 9.33196 0.991713 -1.14807 2.43346</acceleration>
+          <wrench>10.1948 -107.815 1866.39 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose>0 0 -0.1 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 -0.1 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ocean_waves'>
+        <pose>-5.37311 2.7119 0 0 0 -2.28319</pose>
+        <scale>1 1 1</scale>
+        <link name='ocean_waves_link'>
+          <pose>-5.37311 2.7119 0 0 0 -2.28319</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>-12.432934 -2.933358 7.195182 0 0.341797 0.167988</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>      
+    <model name='House 1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>19.3069 0.21115 0 0 -0 0</pose>
+    </model>
+    <model name='House 1_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>27.3041 25.9024 0 0 -0 0</pose>
+    </model>
+    <model name='House 1_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>56.752 21.963 0 0 -0 0</pose>
+    </model>
+    <model name='House 1_2'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>86.4974 37.101 59.56 0 -0 0</pose>
+    </model>
+    <model name='House 1_3'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://house_1/meshes/house_1.dae</uri>
+              <scale>1.5 1.5 1.5</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <pose>105.439 59.56 0 0 -0 0</pose>
+    </model>
+  </world>
+</sdf>

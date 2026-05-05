@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>migbot_gazebo</name>
+  <version>0.0.0</version>
+  <description>
+      ---
+  </description>
+  <maintainer email="---o@---.com">---</maintainer>
+  <license>Apache 2.0</license>
+  <url type="---">---</url>
+  <url type="---">--</url>
+  <author email="---@---.com">---</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>gazebo_plugins</depend>
+  <depend>robot_localization</depend>
+  <depend>xacro</depend>
+  <depend>roscpp</depend>
+</package>

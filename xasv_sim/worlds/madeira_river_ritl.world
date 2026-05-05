@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.6">
+  <world name="madeira_river">
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>0</grid>
+      <origin_visual>0</origin_visual>
+    </scene>
+    <!-- Estimated latitude/longitude of madeira river
+	 from satellite imagery -->
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>-8.798638</latitude_deg>
+      <longitude_deg>-63.952087</longitude_deg>
+      <elevation>58.0</elevation>
+      <heading_deg>0.0</heading_deg>
+    </spherical_coordinates>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <gui fullscreen="0">
+      <camera name='user_camera'>
+        <!--<pose>-54 25 160.0 0.0 0.3 0.17</pose>-->
+        <pose>1129.670166 -393.399628 15.806142 0 0.195999 2.902938</pose>
+        <view_controller>orbit</view_controller>
+      </camera>
+      <!--<plugin name="GUITaskWidget" filename="libgui_task_widget.so"/>-->
+    </gui>
+    <include>
+      <!-- Note - the pose tag doesn't seem to work for heightmaps, so you need
+      to go into the model file to change the altitutde/height!-->
+      <pose>80 20 -36 0 0 0.5</pose>
+      <uri>model://SAE_HYDRO_V0</uri>
+	<plugin name="trunk_scaler" filename="libTrunkScaler.so">
+	  <link_name>trunk</link_name>
+	  <profile>linear_up</profile>
+	  <scale_amplitude>0.5</scale_amplitude>
+	  <cycle_seconds>10.0</cycle_seconds>
+	  <run_duration>20.0</run_duration>
+	  <profile_exp>1.0</profile_exp>
+	  <noise_smoothing>0.3</noise_smoothing>
+	  <start_delay>5.0</start_delay>  
+	</plugin>
+
+	<plugin name="vegetation_scaler" filename="libTrunkScaler.so">
+	  <link_name>vegetation</link_name>
+	  <profile>linear_up</profile>
+	  <scale_amplitude>0.0001</scale_amplitude>
+	  <scale_amp_x>0.5</scale_amp_x>
+	  <scale_amp_y>0.5</scale_amp_y>
+	  <scale_amp_z>1</scale_amp_z>  
+	  <cycle_seconds>10.0</cycle_seconds>
+	  <run_duration>20.0</run_duration>
+	  <profile_exp>1.0</profile_exp>
+	  <noise_smoothing>0.3</noise_smoothing>
+	  <start_delay>5.0</start_delay>  
+	</plugin>      
+    </include>
+        
+    <include>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://ocean_waves</uri>
+    </include>
+    
+    <!--<plugin name="trunk2_buoy_spawner" filename="libBuoySpawner.so">
+      <robot_name>migbot1</robot_name>
+      <model_name>trunk2_buoy</model_name>
+      <spawn_period>20.0</spawn_period>     
+      <spawn_distance>20.0</spawn_distance> 
+    </plugin>-->
+
+
+
+
+
+    
+    
+    
+  </world>
+</sdf>
