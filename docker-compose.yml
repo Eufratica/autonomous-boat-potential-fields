@@ -1,0 +1,95 @@
+services:
+  sim:
+    build:
+      context: .
+      dockerfile: docker/sim.Dockerfile
+    image: xasv-simu/sim:noetic
+    container_name: xasv-simu-sim
+    network_mode: host
+    ipc: host
+    user: root
+    environment:
+      DISPLAY: ${DISPLAY}
+      QT_X11_NO_MITSHM: "1"
+      ROS_MASTER_URI: http://127.0.0.1:11311
+      ROS_HOSTNAME: 127.0.0.1
+      CATKIN_WS: /ws
+      XASV_SRC: /ws/src/xasv-simu
+    volumes:
+      - ./.docker/ws:/ws
+      - ./:/ws/src/xasv-simu:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    stdin_open: true
+    tty: true
+    working_dir: /ws
+    command: >
+      bash -lc "
+      source /opt/ros/noetic/setup.bash;
+      source /ws/devel/setup.bash 2>/dev/null || true;
+      roslaunch xasv_sim xasv_sim.launch world_name:=madeira_river robot_name:=migbot1 ardupilot:=true
+      "
+
+  sitl:
+    build:
+      context: .
+      dockerfile: docker/sitl.Dockerfile
+      args:
+        ARDUPILOT_REPO: ${ARDUPILOT_REPO:-https://github.com/lmhonorio/ardupilot.git}
+        ARDUPILOT_REF: ${ARDUPILOT_REF:-master}
+    image: xasv-simu/sitl:ubuntu20.04
+    container_name: xasv-simu-sitl
+    network_mode: host
+    environment:
+      XASV_REPO: /work/xasv-simu
+      REBUILD_SITL: ${REBUILD_SITL:-0}
+    volumes:
+      - ./:/work/xasv-simu:ro
+      - ./.docker/sitl/ccache:/root/.ccache
+    stdin_open: true
+    tty: true
+    working_dir: /opt/ardupilot/Rover
+    command: >
+      bash -lc "
+      export PATH=/opt/ardupilot/Tools/autotest:\$PATH &&
+      sim_vehicle.py -D -f rover-skid -S 10 --model gazebo-rover -L SAE_XASV_SIM --add-param-file=mig_sitl.params --no-mavproxy
+      "
+
+  mavproxy:
+    build:
+      context: .
+      dockerfile: docker/tools.Dockerfile
+    image: xasv-simu/tools:ubuntu20.04
+    container_name: xasv-simu-mavproxy
+    network_mode: host
+    depends_on:
+      - sitl
+    environment:
+      DISPLAY: ${DISPLAY}
+      QT_X11_NO_MITSHM: "1"
+    volumes:
+      - ./:/work/xasv-simu:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  
+    stdin_open: true
+    tty: true
+    command: >
+      mavproxy.py --mav20 --console
+      --out=127.0.0.1:14550
+      --out=127.0.0.1:14552
+      --master=tcp:127.0.0.1:5760
+    profiles:
+      - mavproxy
+
+  tools:
+    build:
+      context: .
+      dockerfile: docker/tools.Dockerfile
+    image: xasv-simu/tools:ubuntu20.04
+    container_name: xasv-simu-tools
+    network_mode: host
+    volumes:
+      - ./:/work/xasv-simu:rw
+      - ${HOME}/.config/rclone:/root/.config/rclone:ro
+    stdin_open: true
+    tty: true
+    profiles:
+      - tools

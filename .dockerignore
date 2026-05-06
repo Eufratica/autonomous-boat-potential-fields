@@ -1,0 +1,13 @@
+.git
+.github
+build
+devel
+logs
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.blend
+**/*.blend1
+**/*.dae
+**/*.zst
+.env

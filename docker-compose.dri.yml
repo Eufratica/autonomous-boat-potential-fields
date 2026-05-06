@@ -1,0 +1,14 @@
+services:
+  sim:
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
+
+  tools:
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      - video
+      - render
