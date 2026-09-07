@@ -2,6 +2,8 @@
 build/
 enviroments/blender/SAE_HYDRO_V0/main.blend
 enviroments/blender/SAE_HYDRO_V0/main.blend1
+enviroments/blender/SAE_HYDRO_V0/logboom.dae
+enviroments/blender/SAE_HYDRO_V0/meshes
 *.log
 xasv_sim/models/SAE_HYDRO_V0/meshes/logboom.dae
 xasv_sim/temp.zip
@@ -10,3 +12,5 @@ xasv_sim/temp.zip
 *.parm
 *.tlog
 *.tlog.raw
+core*
+*.bin

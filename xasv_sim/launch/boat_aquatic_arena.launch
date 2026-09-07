@@ -1,0 +1,83 @@
+<launch>
+  <!-- Argumentos do Gazebo -->
+  <arg name="world_name" default="closed_aquatic_arena"/>
+  <arg name="gui" default="true"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="verbose" default="false"/>
+  <arg name="rviz" default="true"/>
+  <arg name="waypoint_nav" default="true"/>
+
+  <!-- Iniciar Gazebo com o mapa aquatico contendo boias -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find xasv_sim)/worlds/$(arg world_name).world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+  </include>
+
+  <!-- Configuracao e Posicao Inicial do Barco -->
+  <arg name="robot_name" default="migbot1"/>
+  <arg name="namespace" default=""/>
+  <arg name="x" default="5.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.05"/>
+  <arg name="R" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="Y" default="0.0"/>
+
+  <!-- Sensores e Recursos do Barco -->
+  <arg name="planar_move_enabled" default="true"/>
+  <arg name="planar_lidar_enabled" default="true"/>
+  <arg name="ground_truth_enabled" default="true"/>
+  <arg name="camera_enabled" default="false"/>
+  <arg name="livox_enabled" default="false"/>
+  <arg name="ping360_enabled" default="false"/>
+
+  <!-- Carregar URDF/Xacro do Barco -->
+  <arg name="urdf" default="$(find migbot_gazebo)/urdf/migbot_gazebo.urdf.xacro"/>
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(arg urdf)
+                  namespace:=$(arg namespace)
+                  robot_name:=$(arg robot_name)
+                  ardupilot:=false
+                  planar_move_enabled:=$(arg planar_move_enabled)
+                  planar_lidar_enabled:=$(arg planar_lidar_enabled)
+                  livox_enabled:=$(arg livox_enabled)
+                  ping360_enabled:=$(arg ping360_enabled)
+                  camera_enabled:=$(arg camera_enabled)
+                  ground_truth_enabled:=$(arg ground_truth_enabled)"/>
+
+  <!-- Spawn do Barco no Gazebo -->
+  <node name="spawn_migbot" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)
+              -urdf -param robot_description
+              -model $(arg robot_name)"/>
+
+  <!-- Publicador de Estados das Juntas (necessario para TF das helices) -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <rosparam param="source_list">["/migbot1/joint_states"]</rosparam>
+  </node>
+
+  <!-- Publicador de Estados e TF do Barco -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+  <!-- No de Navegacao Interativa por Waypoints -->
+  <group if="$(arg waypoint_nav)">
+    <node name="boat_waypoint_nav" pkg="xasv_sim" type="boat_waypoint_nav.py" output="screen">
+      <param name="robot_name" value="$(arg robot_name)"/>
+      <param name="max_linear_speed" value="0.9"/>
+      <param name="max_angular_speed" value="1.2"/>
+      <param name="k_p_yaw" value="1.8"/>
+      <param name="goal_tolerance" value="1.0"/>
+      <param name="slowdown_dist" value="3.0"/>
+    </node>
+  </group>
+
+  <!-- RViz com ferramenta 2D Nav Goal pre-configurada -->
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find xasv_sim)/rviz/waypoint_nav.rviz" output="screen"/>
+  </group>
+
+</launch>

@@ -1,0 +1,71 @@
+<launch>
+  <!-- Argumentos Principais -->
+  <arg name="world_name" default="test_scaled_arena"/>
+  <arg name="gui" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="run_apf" default="true"/>
+  <arg name="rviz" default="false"/>
+
+  <!-- Iniciar Gazebo com a arena aquatica fechada e obstaculos estaticos -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find migbot_gazebo)/worlds/$(arg world_name).world"/>
+    <arg name="verbose" value="false"/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+  </include>
+
+  <!-- Configuracao do Robo Barco -->
+  <arg name="robot_name" default="migbot1"/>
+  <arg name="namespace" default=""/>
+  
+  <!-- Posicao de Spawn inicial dentro da arena aquatica -->
+  <arg name="x" default="5.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.05"/>
+  <arg name="R" default="0"/>
+  <arg name="P" default="0"/>
+  <arg name="Y" default="0.0"/>
+
+  <!-- Carregar modelo URDF/Xacro do Barco com LiDAR 2D e Controle Planar via /cmd_vel -->
+  <arg name="urdf" default="$(find migbot_gazebo)/urdf/migbot_gazebo.urdf.xacro"/>
+  <param name="robot_description"
+         command="$(find xacro)/xacro $(arg urdf)
+                  namespace:=$(arg namespace)
+                  robot_name:=migbot1_ros
+                  ardupilot:=false
+                  planar_move_enabled:=true
+                  planar_lidar_enabled:=true
+                  livox_enabled:=false
+                  ping360_enabled:=false
+                  camera_enabled:=false
+                  ground_truth_enabled:=true"/>
+
+  <!-- Spawn do Barco no Gazebo -->
+  <node name="spawn_migbot" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)
+              -urdf -param robot_description
+              -model $(arg robot_name)"/>
+
+  <!-- Publicador de Estados e TF da Transformada do Laser -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+  <!-- No de Desvio de Obstaculos por Campos Potenciais Artificiais (APF) -->
+  <group if="$(arg run_apf)">
+    <node name="boat_potential_fields" pkg="xasv_sim" type="boat_potential_fields.py" output="screen">
+      <param name="robot_name" value="$(arg robot_name)"/>
+      <param name="k_att" value="1.5"/>
+      <param name="k_rep" value="1.2"/>
+      <param name="d0" value="5.5"/>
+      <param name="d_critical" value="1.2"/>
+      <param name="max_surge" value="0.75"/>
+      <param name="k_yaw" value="2.2"/>
+    </node>
+  </group>
+
+  <!-- RViz opcional -->
+  <group if="$(arg rviz)">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find xasv_sim)/rviz/potential_fields.rviz"/>
+  </group>
+
+</launch>

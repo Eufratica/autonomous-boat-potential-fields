@@ -232,13 +232,10 @@
     </sensor>
   </link>
 
-  <joint name="imu_joint" type="revolute">
+  <joint name="imu_joint" type="fixed">
     <parent link="base_link"/>
     <child link="imu_link"/>
     <origin rpy="0 0 0" xyz="-0.01 0.002 0.082"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="0.0" lower="0" upper="0" velocity="0"/>
-    <dynamics damping="0.7" friction="0" spring_reference="0" spring_stiffness="0"/>
   </joint>
 
   <gazebo reference="imu_link">

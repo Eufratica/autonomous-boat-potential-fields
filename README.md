@@ -1,10 +1,27 @@
+# Autonomous Boat Potential Fields (ASV Simulation & APF Navigation)
+
+A complete **ROS Noetic + Gazebo** simulation environment for **Autonomous Surface Vessels (ASVs)** featuring:
+- 🌊 **Closed Aquatic Arena**: Realistic aquatic world with 42 marine navigation buoys (slalom, hazard markers, and channel boundaries).
+- 🧲 **Artificial Potential Fields (APF)**: Dynamic obstacle avoidance powered by planar LiDAR range data ($U_{rep} = -\frac{1}{2} k (\frac{1}{d} - \frac{1}{d_0})^2$).
+- 🎯 **Interactive Waypoint Navigation**: Point-and-click navigation using RViz **2D Nav Goal** with attractive potential field ($F_{att}$), smooth heading alignment, and arrival deceleration.
+- 🚤 **ASV Robot (migbot1)**: Complete hydrodynamics, buoyancy physics, calibrated TF tree (IMU & propellers), and planar LiDAR.
+- 📊 **Real-time RViz Visualizations**: 3D force vectors (Attractive = Green, Repulsive = Red, Total = Blue), goal markers, and vehicle path history.
+
+### 🚀 Quick Start (Simulation + RViz + APF Navigation)
+```bash
+roslaunch xasv_sim boat_aquatic_arena.launch gui:=true rviz:=true
+```
+In RViz, click the **2D Nav Goal** tool and set a destination anywhere on the water. The boat will compute attractive and repulsive forces in real-time, autonomously navigate around buoys, and stop at the destination!
+
+---
+
 # xasv-simu
 
 <p align="center">
   <img src="docs/figs/logo.png" alt="xasv-simu logo" width="400">
 </p>
 
-**xasv-simu** is a clean GitHub distribution of the **xasv-sim** stack: a **ROS + ArduPilot + Gazebo** simulation environment for autonomous surface vessels (ASVs) in realistic river environments, with optional **X-in-the-Loop** workflows such as **MITL**, **SITL**, **HITL**, **RITL**, and **HuITL**.
+**xasv-simu** is a clean distribution of the **xasv-sim** stack: a **ROS + ArduPilot + Gazebo** simulation environment for autonomous surface vessels (ASVs) in realistic river environments, with optional **X-in-the-Loop** workflows such as **MITL**, **SITL**, **HITL**, **RITL**, and **HuITL**.
 
 This repository contains the reference simulation assets, ROS packages, Gazebo worlds, Blender-based modeling assets, custom plugins, and auxiliary scripts used in ASV navigation and inspection experiments.
 

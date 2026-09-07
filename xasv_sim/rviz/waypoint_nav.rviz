@@ -1,0 +1,149 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /RobotModel1
+        - /LaserScan1
+        - /Target Marker1
+        - /Driven Path1
+      Splitter Ratio: 0.5
+    Tree Height: 549
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 5
+      Class: rviz/Grid
+      Color: 120; 120; 130
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 30
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 30
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Name: RobotModel
+      Robot Description: robot_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/LaserScan
+      Color: 255; 50; 50
+      Color Transformer: FlatColor
+      Decay Time: 0
+      Enabled: true
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Min Color: 0; 0; 0
+      Name: LaserScan
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 4
+      Size (m): 0.12
+      Style: Points
+      Topic: /scan
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: false
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /waypoint_nav/target_marker
+      Name: Target Marker
+      Queue Size: 10
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /waypoint_nav/target_line
+      Name: Target Line
+      Queue Size: 10
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /waypoint_nav/force_markers
+      Name: APF Force Vectors
+      Namespaces:
+        forces: true
+      Queue Size: 100
+      Value: true
+    - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 0; 255; 150
+      Enabled: true
+      Head Diameter: 0.3
+      Head Color: 0; 255; 0
+      Length: 0.3
+      Line Style: Lines
+      Line Width: 0.08
+      Name: Driven Path
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.03
+      Shaft Diameter: 0.1
+      Shaft Length: 0.1
+      Topic: /waypoint_nav/driven_path
+      Unreliable: false
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 30; 30; 35
+    Default Light: true
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/SetGoal
+      Topic: /move_base_simple/goal
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 45
+      Focal Point:
+        X: 25
+        Y: 0
+        Z: 0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.85
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 0.0
+    Saved: ~

@@ -1,0 +1,844 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="closed_aquatic_arena">
+    <scene>
+      <sky>
+        <clouds>
+          <speed>12</speed>
+        </clouds>
+      </sky>
+      <grid>0</grid>
+      <origin_visual>0</origin_visual>
+    </scene>
+
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Water Surface -->
+    <include>
+      <pose>0 0 0 0 0 0</pose>
+      <uri>model://ocean_waves</uri>
+    </include>
+
+    <!-- ==================== ARENA PERIMETER (CLOSED BOUNDARY 60m x 40m) ==================== -->
+    <!-- North Wall -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>30 20 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>62 0.8 1.5</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>62 0.8 1.5</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- South Wall -->
+    <model name="wall_south">
+      <static>true</static>
+      <pose>30 -20 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>62 0.8 1.5</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>62 0.8 1.5</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- East Wall -->
+    <model name="wall_east">
+      <static>true</static>
+      <pose>60 0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 40.8 1.5</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 40.8 1.5</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- West Wall -->
+    <model name="wall_west">
+      <static>true</static>
+      <pose>0 0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="visual">
+          <geometry><box><size>0.8 40.8 1.5</size></box></geometry>
+          <material><script><name>Gazebo/Grey</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><box><size>0.8 40.8 1.5</size></box></geometry>
+        </collision>
+      </link>
+    </model>
+
+    <!-- ==================== STATIC OBSTACLES (BUOYS ON WATER) ==================== -->
+    <model name="buoy_gate1_green">
+      <static>true</static>
+      <pose>10.0 4.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_gate1_red">
+      <static>true</static>
+      <pose>10.0 -4.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_start_haz1">
+      <static>true</static>
+      <pose>14.0 1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_start_haz2">
+      <static>true</static>
+      <pose>15.0 -2.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_green1">
+      <static>true</static>
+      <pose>19.0 7.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_red1">
+      <static>true</static>
+      <pose>20.0 12.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_haz1">
+      <static>true</static>
+      <pose>23.0 8.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_red2">
+      <static>true</static>
+      <pose>26.0 5.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_red3">
+      <static>true</static>
+      <pose>19.0 -7.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_green2">
+      <static>true</static>
+      <pose>20.0 -12.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_haz2">
+      <static>true</static>
+      <pose>23.0 -8.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s1_green3">
+      <static>true</static>
+      <pose>26.0 -5.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_center_haz1">
+      <static>true</static>
+      <pose>22.0 0.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.65</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.33</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.65</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_center_haz2">
+      <static>true</static>
+      <pose>27.0 -0.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_gate2_green">
+      <static>true</static>
+      <pose>31.0 4.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_gate2_red">
+      <static>true</static>
+      <pose>31.0 -4.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_haz1">
+      <static>true</static>
+      <pose>35.0 9.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_red1">
+      <static>true</static>
+      <pose>35.0 2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_green1">
+      <static>true</static>
+      <pose>35.0 -3.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_haz2">
+      <static>true</static>
+      <pose>35.0 -10.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_haz3">
+      <static>true</static>
+      <pose>38.0 6.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_haz4">
+      <static>true</static>
+      <pose>38.0 -0.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.65</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.33</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.65</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_green2">
+      <static>true</static>
+      <pose>38.0 -7.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_red2">
+      <static>true</static>
+      <pose>41.0 3.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_haz5">
+      <static>true</static>
+      <pose>41.0 -4.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_green3">
+      <static>true</static>
+      <pose>42.0 10.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_s2_red3">
+      <static>true</static>
+      <pose>42.0 -11.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_gate3_green">
+      <static>true</static>
+      <pose>46.0 5.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_gate3_red">
+      <static>true</static>
+      <pose>46.0 -5.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_center">
+      <static>true</static>
+      <pose>49.0 0.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.70</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.35</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.70</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_red1">
+      <static>true</static>
+      <pose>52.0 6.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Red</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_green1">
+      <static>true</static>
+      <pose>52.0 -6.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.28</radius></sphere></geometry>
+          <material><script><name>Gazebo/Green</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.55</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_haz1">
+      <static>true</static>
+      <pose>54.0 2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_haz2">
+      <static>true</static>
+      <pose>54.0 -2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.30</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.60</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_haz3">
+      <static>true</static>
+      <pose>55.0 9.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_end_haz4">
+      <static>true</static>
+      <pose>55.0 -9.5 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_north1">
+      <static>true</static>
+      <pose>15.0 16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_north2">
+      <static>true</static>
+      <pose>30.0 16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_north3">
+      <static>true</static>
+      <pose>45.0 16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_south1">
+      <static>true</static>
+      <pose>15.0 -16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_south2">
+      <static>true</static>
+      <pose>30.0 -16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+    <model name="buoy_lat_south3">
+      <static>true</static>
+      <pose>45.0 -16.0 0.5 0 0 0</pose>
+      <link name="link">
+        <visual name="body">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <visual name="top_beacon">
+          <pose>0 0 0.85 0 0 0</pose>
+          <geometry><sphere><radius>0.25</radius></sphere></geometry>
+          <material><script><name>Gazebo/Yellow</name></script></material>
+        </visual>
+        <collision name="collision">
+          <geometry><cylinder><radius>0.50</radius><length>1.40</length></cylinder></geometry>
+        </collision>
+      </link>
+    </model>
+  </world>
+</sdf>

@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="migbot1">
+  <xacro:arg name="planar_move_enabled" default="true" />
+  <xacro:arg name="planar_lidar_enabled" default="false" />
   <xacro:arg name="livox_enabled" default="false" />
   <xacro:arg name="ping360_enabled" default="false" />
   <xacro:arg name="realsensed435_enabled" default="false" />  
@@ -38,5 +40,24 @@
 	    prefix ="realsense"/>
     </xacro:if>          
 
+
+    <!-- Add 2D Planar LIDAR --> 
+    <xacro:if value="$(arg planar_lidar_enabled)">
+        <xacro:planar_lidar_mount name="laser" topic="/scan" />
+    </xacro:if> 
+
+    <!-- Planar Movement Plugin (for reliable non-holonomic boat control via /cmd_vel) -->
+    <xacro:if value="$(arg planar_move_enabled)">
+      <gazebo>
+        <plugin name="planar_move" filename="libgazebo_ros_planar_move.so">
+          <commandTopic>/cmd_vel</commandTopic>
+          <odometryTopic>/odom</odometryTopic>
+          <odometryFrame>odom</odometryFrame>
+          <odometryRate>30.0</odometryRate>
+          <robotBaseFrame>base_link</robotBaseFrame>
+          <enableYAxis>false</enableYAxis>
+        </plugin>
+      </gazebo>
+    </xacro:if>
 
 </robot>
